@@ -1,291 +1,512 @@
-# AgentVault Plan
+# AgentVault Final Plan
 
-## Goal
+## Project
 
-Build a trust-first launchpad and governance layer for AI agents on 0G.
+`AgentVault` is a trust-first launchpad and governance layer for AI agents on 0G.
 
-AgentVault will let creators tokenize agents with `Agentic ID`, attach encrypted manifests, define operating policies, expose monetized usage, and give users a verifiable control surface for trust and safety.
+The product is not another generic marketplace. The product is the missing trust and control layer around agent creation, ownership, listing, execution visibility, and safe monetization.
 
-## Problem Statement
+## Research Basis
 
-0G already makes it possible to build agent-native applications. What remains underbuilt is the trust and governance layer around those agents.
+This plan is based on current 0G documentation and public 0G ecosystem material reviewed before planning:
 
-Current pain points:
+- `Agentic ID` is 0G's core primitive for tokenizing AI agents with transferable intelligence, encrypted metadata, and ownership semantics built on `ERC-7857`.
+- `Agentic ID` is designed to work across `0G Storage`, `0G Chain`, `0G Compute`, and `0G DA`.
+- 0G positions its stack as modular, which supports a clean architecture with isolated adapters instead of a tightly coupled monolith.
+- 0G ecosystem signals show the stronger opportunity is not "yet another agent marketplace" but a more operational product around governance, verification, and safe agent usage.
 
-- agent ownership is not enough without execution controls
-- users need proof, logs, and clear permissions before using an agent
-- creators need a secure way to publish and monetize agents
-- investors, judges, and early users want visible governance primitives
-- agent lifecycle actions should be inspectable and reversible when possible
+Reference documents:
+
+- https://docs.0g.ai/
+- https://docs.0g.ai/concepts/agentic-id
+- https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/overview
+- https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/integration
+- https://0g.ai/blog/agentic-ai-market-infra-2026
+- https://0g.ai/blog/0g-private-computer
 
 ## Product Thesis
 
-The best 0G-native agent product is not another generic marketplace.
+0G already gives builders the infrastructure to own and operate AI agents. What remains underbuilt is the layer that answers:
 
-The better product is a launchpad with embedded governance:
+- who owns the agent
+- what the agent is allowed to do
+- where the agent manifest and state live
+- how execution events are surfaced
+- how unsafe agents are paused
+- how creators monetize usage safely
 
-- creation
-- ownership
-- permissions
-- proof
-- reputation
-- monetization
-- emergency controls
+AgentVault should solve those problems with one product.
 
-## Users
+## Final Product Scope
 
-### Primary Users
+AgentVault will allow a creator to:
 
-- builders launching AI agents on 0G
-- early adopters using paid or public agents
-- teams that need auditable agent operations
+- define an AI agent
+- attach a structured manifest
+- store encrypted metadata on `0G Storage`
+- mint the agent as an `Agentic ID`
+- publish a public listing
+- configure policy controls
+- pause or resume the agent
+- expose trust and activity signals
+- prepare the agent for paid access
 
-### Secondary Users
-
-- hackathon judges
-- ecosystem partners
-- future integrators using AgentVault contracts or SDKs
-
-## Core Features
-
-### 1. Agent Launch
-
-- create agent profile
-- define name, category, capabilities, pricing, and risk level
-- upload encrypted manifest to `0G Storage`
-- mint a linked `Agentic ID`
-
-### 2. Governance Controls
-
-- owner-only update controls
-- role-based permissions for maintainers
-- pause / unpause
-- revoke public usage
-- usage caps and spend limits
-
-### 3. Trust Surface
-
-- verifiable agent metadata hash
-- execution logs
-- status history
-- trust score and reliability indicators
-- proof references for important lifecycle events
-
-### 4. Monetization
-
-- free / paid usage modes
-- pay-per-call pricing
-- subscription tier hooks
-- payout routing for creator revenue
-
-### 5. Discovery
+AgentVault will allow a user to:
 
 - browse listed agents
-- inspect capabilities and risk profile
-- compare pricing and status
-- review recent execution activity
+- inspect ownership and manifest-derived details
+- see trust and status signals
+- review recent activity
+- understand pricing and access mode
+
+## Core 0G Alignment
+
+### Hard Commit Components
+
+These must be real in the build:
+
+- `Agentic ID`
+- `0G Storage`
+- `0G Chain`
+
+### Soft Commit Components
+
+These should be designed in from the start but may remain modular during early phases:
+
+- `0G Compute` / `0G Private Computer`
+- `0G DA`
+
+### Optional Early Component
+
+This should be architecture-ready but not allowed to destabilize the MVP:
+
+- `0G Pay`
+
+## MVP Boundary
+
+### Must Be Real
+
+- creator can create an agent draft
+- system validates a manifest schema
+- manifest is encrypted or prepared for encrypted storage
+- manifest is uploaded to `0G Storage`
+- linked `Agentic ID` mint flow exists
+- onchain registry or policy state is written
+- public listing is viewable
+- owner can pause and resume an agent
+- trust panel shows explicit, explainable signals
+
+### Can Be Lightweight in Early Versions
+
+- advanced compute verification
+- complex reputation scoring
+- full subscription billing
+- deep analytics
+- multi-agent orchestration
+- autonomous execution engine
 
 ## Non-Goals
 
-- building a full autonomous trading platform
-- creating a generalized no-code AI builder
-- replacing 0G-native infrastructure components
-- supporting all chains in V1
+- not a generic NFT marketplace clone
+- not a full autonomous trading platform
+- not a generalized no-code AI builder
+- not a cross-chain hub in V1
+- not a monolithic product that couples every 0G module into one fragile flow
 
-## 0G Components We Will Use
+## User Roles
 
-## `Agentic ID`
+### Creator
 
-- represents agent ownership and transferability
-- anchors the agent as a tokenized AI asset
+- launches and manages agents
+- uploads manifests
+- controls listing and policy
+- monitors trust and activity
 
-## `0G Storage`
+### User
 
-- stores encrypted manifests, config snapshots, and optional execution artifacts
+- discovers agents
+- evaluates trust
+- uses or subscribes to an agent later
 
-## `0G Chain`
+### Operator / Maintainer
 
-- hosts AgentVault contracts for registry, policy, and lifecycle control
+- observes runtime events
+- manages indexing and storage integrity
+- supports trust event ingestion
 
-## `0G Compute` / `0G Private Computer`
+## System Model
 
-- powers secure or verifiable inference for managed agent execution
+### Onchain
 
-## `0G DA`
+- listing state
+- ownership links
+- policy state
+- emergency controls
+- optional billing configuration
 
-- supports integrity verification and transfer-related proof anchoring
-
-## `0G Pay`
-
-- supports agent monetization and billing flows
-
-## Functional Requirements
-
-### Required for MVP
-
-- creators can register an agent
-- system stores encrypted metadata on `0G Storage`
-- creators can mint an `Agentic ID`
-- users can view agent details and current trust status
-- owners can pause and resume an agent
-- system records execution events in a readable timeline
-- paid access model can be represented in product and contract design
-
-### Required for Demo
-
-- one working demo agent
-- one creator flow
-- one consumer flow
-- one lifecycle control action
-- one proof or trust surface visible in UI
-
-## Proposed System Design
-
-## Frontend
-
-- creator dashboard
-- public agent pages
-- governance and activity views
-- wallet connection
-
-## Backend / Orchestrator
-
-- manifest encryption and upload pipeline
-- execution log ingestion
-- trust score calculation
-- policy evaluation helpers
-- billing coordination
-
-## Smart Contracts
-
-- `AgentVaultRegistry`
-- `AgentVaultPolicy`
-- `AgentVaultBilling`
-- `AgentVaultEmergencyControl`
-
-## Storage and Data
+### 0G Storage
 
 - encrypted agent manifest
-- public agent summary
-- lifecycle event log
-- trust and usage aggregates
+- config snapshots
+- optional execution artifacts
+- optional public metadata bundles
 
-## Clean Architecture Direction
+### App Database
 
-The codebase should follow clear boundaries:
+- indexed listings
+- queryable activity feeds
+- derived trust summaries
+- UI-facing aggregates
 
-- domain layer
-  agent, policy, billing, trust, execution event
-- application layer
-  create agent, mint agentic id, update policy, pause agent, publish listing
-- infrastructure layer
-  0G Storage adapter, chain adapter, compute adapter, payment adapter
-- presentation layer
-  web app, admin surfaces, API handlers
+### Compute Layer
 
-This keeps 0G-specific integrations isolated while preserving a stable product core.
+- optional verifiable execution or inference routing
+- future execution receipt ingestion
 
-## Milestones
+## Domain Model
 
-## Phase 0: Architecture and Specs
+### Core Entities
 
-- confirm product scope
-- define domain entities
-- define storage schema
-- define contract boundaries
-- document flows
+- `Agent`
+- `AgentManifest`
+- `AgentListing`
+- `AgentPolicy`
+- `ExecutionEvent`
+- `TrustProfile`
+- `BillingPlan`
 
-## Phase 1: Repo Scaffold
+### Lifecycle
 
-- create monorepo structure
-- add package boundaries
-- set up linting, formatting, env management
-- add shared schema package
+`draft -> stored -> minted -> listed -> active -> paused -> archived`
 
-## Phase 2: Agent Launch Flow
+## Clean Architecture
 
-- build creator form
-- encrypt manifest
-- upload to `0G Storage`
-- mint `Agentic ID`
-- persist listing record
+### Domain Layer
 
-## Phase 3: Governance and Trust
+Pure product rules:
 
-- implement policy model
-- add pause / resume action
-- show execution log timeline
-- calculate simple trust score
+- agent rules
+- policy rules
+- trust rules
+- billing rules
 
-## Phase 4: Monetization
+### Application Layer
 
-- define billing model
-- wire `0G Pay` integration points
-- show usage plans and paid access flow
+Use cases:
 
-## Phase 5: Hackathon Hardening
+- create draft
+- validate manifest
+- upload manifest
+- mint agentic id
+- publish listing
+- update policy
+- pause agent
+- resume agent
+- record execution event
+- compute trust summary
 
-- polish UI
-- add architecture diagram
-- prepare demo script
+### Infrastructure Layer
+
+Adapters:
+
+- `ChainAdapter`
+- `AgenticIdAdapter`
+- `StorageAdapter`
+- `ComputeAdapter`
+- `DaProofAdapter`
+- `PaymentAdapter`
+- `PersistenceAdapter`
+
+### Presentation Layer
+
+Surfaces:
+
+- creator dashboard
+- public listing pages
+- policy and governance panel
+- trust and activity views
+
+## Real Build Phases
+
+## Phase 0: Product Lock
+
+Goal:
+remove ambiguity before code.
+
+Tasks:
+
+- freeze the product statement
+- freeze MVP scope
+- freeze the first demo agent category
+- decide what is real and what is simulated
+- define Wave 1 and Wave 2 success criteria
+
+Deliverables:
+
+- final product scope
+- user journeys
+- entity list
+- MVP boundary
+
+## Phase 1: Protocol and Domain Design
+
+Goal:
+define the product core and contract boundaries.
+
+Tasks:
+
+- define manifest schema
+- define listing schema
+- define policy model
+- define trust model v1
+- define contract responsibilities
+- decide onchain vs storage vs database boundaries
+
+Deliverables:
+
+- domain model
+- storage schema
+- contract interface draft
+- trust logic spec
+
+## Phase 2: Repo and Engineering Foundation
+
+Goal:
+set stable engineering foundations.
+
+Tasks:
+
+- scaffold monorepo
+- set TypeScript boundaries
+- add shared schemas
+- add linting and formatting
+- add environment strategy
+- add CI-ready scripts if time allows
+
+Deliverables:
+
+- repo skeleton
+- shared package boundaries
+- validation strategy
+
+## Phase 3: 0G Core Integration
+
+Goal:
+prove the app is genuinely 0G-native.
+
+Integration priority:
+
+1. `0G Storage`
+2. `Agentic ID`
+3. `0G Chain`
+4. `0G Compute` / `0G Private Computer`
+5. `0G DA`
+6. `0G Pay`
+
+Tasks:
+
+- implement storage adapter
+- implement manifest upload path
+- implement agentic id mint path
+- implement registry write path
+- document integration assumptions and edge cases
+
+Deliverables:
+
+- storage flow
+- mint flow
+- registry flow
+- integration notes
+
+## Phase 4: Creator Launch Flow
+
+Goal:
+complete one creator journey end to end.
+
+Tasks:
+
+- wallet connect
+- create agent form
+- manifest review step
+- publish flow
+- success confirmation
+- creator dashboard shell
+
+Deliverables:
+
+- first complete launch flow
+- persisted listing
+- public agent detail page
+
+## Phase 5: Governance and Trust Layer
+
+Goal:
+build the differentiator.
+
+Tasks:
+
+- policy controls
+- pause / resume
+- trust signal panel
+- activity timeline
+- visible ownership and manifest hash references
+
+Deliverables:
+
+- governance panel
+- trust panel
+- lifecycle history
+
+## Phase 6: Execution Visibility
+
+Goal:
+show the agent as operational, not just minted.
+
+Tasks:
+
+- connect one demo runtime or execution adapter
+- record execution events
+- store or index summary artifacts
+- surface proof references where possible
+
+Deliverables:
+
+- execution timeline
+- one demo runtime path
+- visible execution metadata
+
+## Phase 7: Monetization Layer
+
+Goal:
+prepare agents to function as products.
+
+Tasks:
+
+- free / paid access model
+- metered or subscription-ready plan model
+- creator payout design
+- modular payment adapter
+
+Deliverables:
+
+- billing model
+- pricing UI
+- payment integration boundary
+
+## Phase 8: Hackathon Packaging
+
+Goal:
+optimize clarity, polish, and judging.
+
+Tasks:
+
+- improve landing and dashboard polish
 - tighten README and setup docs
+- add architecture visual
+- prepare screenshots
+- prepare demo script
+- prepare submission narrative
 
-## Wave-Oriented Delivery
+Deliverables:
 
-## Wave 1 Target
+- demo-ready app
+- submission-ready repository
+- polished documentation
 
-- polished concept
-- repo setup
+## Phase 9: Mainnet and Hardening
+
+Goal:
+prepare for serious delivery beyond concept stage.
+
+Tasks:
+
+- verify deployment flow
+- harden policy paths
+- improve error handling
+- replace soft mocks with real integrations
+- document operational assumptions
+
+Deliverables:
+
+- mainnet-ready plan
+- verified deployment checklist
+- production hardening notes
+
+## Delivery Sequence
+
+The correct build order is:
+
+1. product lock
+2. domain and protocol design
+3. repo scaffold
+4. storage and mint flow
+5. listing flow
+6. governance and trust
+7. execution visibility
+8. monetization
+9. polish and submission
+
+## Wave Mapping
+
+## Wave 1
+
+- final concept
+- repo scaffold
+- domain model
 - architecture docs
-- initial contracts and schemas
-- UI mock or starter dashboard
+- manifest schema
+- early UI or flow prototype
 
-## Wave 2 Target
+## Wave 2
 
-- testnet flow for create + mint + view
-- demo video of agent registration
-- basic trust and policy surface
+- working testnet flow
+- create -> store -> mint -> list
+- trust panel
+- governance controls
+- demo video
 
-## Wave 3 Target
+## Wave 3
 
 - mainnet deployment path
 - verified addresses
-- proof-backed lifecycle actions
+- stronger execution and trust surfaces
+
+## Tech Stack Decision
+
+The final stack is documented separately in [TECHSTACK.md](./TECHSTACK.md).
+
+## Rules for Building
+
+Build constraints and things to avoid are documented separately in [RULES.md](./RULES.md).
 
 ## Risks
 
-- `Agentic ID` implementation complexity may exceed generic ERC-721 assumptions
-- proof UX can become vague if not grounded in visible artifacts
-- `0G Pay` integration details may evolve and should remain modular
-- secure key handling must be abstracted carefully in demos
+- `Agentic ID` implementation details may be stricter than a normal NFT flow
+- proof surfaces can become vague if not tied to explicit artifacts
+- overcommitting to `0G Pay` too early can slow delivery
+- coupling app logic too tightly to chain logic will hurt iteration speed
+- trying to ship too many agent categories will weaken the demo
 
-## Risk Mitigation
+## Risk Controls
 
-- keep `Agentic ID` integration isolated in a dedicated module
-- treat trust score as transparent and explainable, not magical
-- separate product-facing billing abstraction from chain-specific settlement
-- prefer one complete flow over many partial flows
+- isolate every 0G integration behind an adapter
+- keep one manifest schema as the source of truth
+- use one demo agent category only
+- prioritize one complete flow over many incomplete flows
+- keep trust scoring explainable and rules-based
 
 ## Success Criteria
 
-- clear 0G-native story
-- technically coherent architecture
-- visible use of at least three 0G components
+- clearly 0G-native
+- technically coherent
 - differentiated from generic marketplaces
-- demoable by judges without deep setup friction
+- easy to explain in under one minute
+- demoable without fragile setup
+- uses at least three 0G components in a meaningful way
 
-## Immediate Next Build Tasks
+## Immediate Next Tasks
 
-1. Create the repo scaffold
-2. Define the agent manifest schema
-3. Design the contract interfaces
-4. Build the first creator dashboard screen
-5. Implement `0G Storage` upload path
-6. Implement `Agentic ID` mint flow
-
-## Reference Docs
-
-- 0G docs home: https://docs.0g.ai/
-- Agentic ID concept: https://docs.0g.ai/concepts/agentic-id
-- Agentic ID overview: https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/overview
-- Agentic ID integration guide: https://docs.0g.ai/developer-hub/building-on-0g/agentic-id/integration
+1. finalize `TECHSTACK.md`
+2. finalize `RULES.md`
+3. keep the current architecture unless implementation proves otherwise
+4. start with manifest schema before any UI over-expansion
