@@ -1,142 +1,3638 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
-@import "tw-animate-css";
-@plugin "@tailwindcss/typography";
-
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-  --color-card-border: hsl(var(--card-border));
-
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-  --color-popover-border: hsl(var(--popover-border));
-
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-  --color-primary-border: hsl(var(--primary) / 0.5);
-
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-  --color-secondary-border: hsl(var(--secondary) / 0.5);
-
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-muted-border: hsl(var(--muted) / 0.5);
-
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-accent-border: hsl(var(--accent) / 0.5);
-
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-destructive-border: hsl(var(--destructive) / 0.5);
-
-  --font-sans: var(--app-font-sans);
-  --font-serif: var(--app-font-serif);
-  --font-mono: var(--app-font-mono);
-  --font-display: var(--app-font-display);
-
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-}
-
-:root, .dark {
-  --background: 220 43% 4%;
-  --foreground: 195 40% 94%;
-  --border: 220 43% 15%;
-  --card: 220 43% 6%;
-  --card-foreground: 195 40% 94%;
-  --card-border: 220 43% 15%;
-  --popover: 220 43% 6%;
-  --popover-foreground: 195 40% 94%;
-  --popover-border: 220 43% 15%;
-  
-  --primary: 174 100% 50%;
-  --primary-foreground: 220 43% 4%;
-  
-  --secondary: 338 100% 59%;
-  --secondary-foreground: 220 43% 4%;
-  
-  --muted: 220 43% 10%;
-  --muted-foreground: 201 20% 62%;
-  
-  --accent: 172 100% 42%;
-  --accent-foreground: 220 43% 4%;
-  
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 0 0% 100%;
-  
-  --input: 220 43% 15%;
-  --ring: 174 100% 50%;
-
-  --app-font-sans: 'Inter', sans-serif;
-  --app-font-display: 'Orbitron', sans-serif;
-  --app-font-serif: Georgia, serif;
-  --app-font-mono: Menlo, monospace;
-  --radius: .5rem;
-
-  --shadow-neon-cyan: 0 0 10px hsl(174 100% 50% / 0.5), 0 0 20px hsl(174 100% 50% / 0.3);
-  --shadow-neon-pink: 0 0 10px hsl(338 100% 59% / 0.5), 0 0 20px hsl(338 100% 59% / 0.3);
-}
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply font-sans antialiased bg-background text-foreground overflow-x-hidden;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--app-font-display);
-    @apply tracking-tight;
-  }
+  *, *::before, *::after { box-sizing: border-box; }
+  a { text-decoration: none; }
 }
 
-@layer utilities {
-  .text-gradient-cyan-pink {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
-    animation: gradient-shift 5s ease infinite;
-    background-size: 200% 200%;
-  }
-  .neon-border-cyan {
-    @apply border border-primary/50 shadow-[var(--shadow-neon-cyan)];
-  }
-  .neon-border-pink {
-    @apply border border-secondary/50 shadow-[var(--shadow-neon-pink)];
-  }
-  .bg-grid-pattern {
-    background-size: 40px 40px;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  }
-  .scanline {
-    position: relative;
-    overflow: hidden;
-  }
-  .scanline::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.25) 51%);
-    background-size: 100% 4px;
-    pointer-events: none;
-    z-index: 10;
-  }
-  
-  @keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+
+/* =========================================================
+01. GLOBAL THEME TOKENS
+========================================================= */
+:root {
+--nexus-bg: #02030A;
+/* almost black navy */
+--nexus-bg-2: #08051A;
+/* deep cosmic purple */
+--nexus-surface: #100A24;
+/* dark violet surface */
+--nexus-surface-2: #171032;
+/* elevated violet panel */
+--nexus-text: #F8F3FF;
+/* warm white */
+--nexus-muted: #A9A1B8;
+/* muted lavender */
+--nexus-soft: #7C748E;
+/* soft gray-violet */
+--nexus-cyan: #35DDF2;
+/* glass cyan */
+--nexus-pink: #F45BA8;
+/* soft neon rose */
+--nexus-gold: #E8B85D;
+/* muted coin gold */
+--nexus-blue: #5E8CFF;
+/* clean electric blue */
+--nexus-purple: #A477FF;
+/* soft violet */
+--nexus-border: rgba(248, 243, 255, 0.11);
+--nexus-border-soft: rgba(248, 243, 255, 0.07);
+}
+html {
+scroll-behavior: smooth;
+}
+body {
+margin: 0;
+background:
+radial-gradient(circle at 72% 12%, rgba(53, 221, 242, 0.075), transparent 34%),
+radial-gradient(circle at 18% 18%, rgba(244, 91, 168, 0.065), transparent 34%),
+radial-gradient(circle at 52% 86%, rgba(232, 184, 93, 0.045), transparent 32%),
+linear-gradient(180deg, var(--nexus-bg-2), var(--nexus-bg));
+color: var(--nexus-text);
+font-family: "Space Mono", monospace;
+overflow-x: hidden;
+min-height: 100vh;
+-webkit-font-smoothing: antialiased;
+text-rendering: geometricPrecision;
+}
+::selection {
+background: var(--nexus-pink);
+color: white;
+}
+/* =========================================================
+02. TYPOGRAPHY SYSTEM
+========================================================= */
+.font-display {
+font-family: "Space Grotesk", sans-serif;
+}
+.font-mono,
+.font-space-mono {
+font-family: "Space Mono", monospace;
+}
+.font-arcade,
+.font-vt323 {
+font-family: "VT323", monospace;
+}
+/* =========================================================
+03. GLOBAL BACKGROUND / PHYSICS CANVAS
+========================================================= */
+#physics-layer {
+position: absolute;
+inset: 0 auto auto 0;
+z-index: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+overflow: hidden;
+opacity: 0.96;
+}
+#pixel-canvas {
+position: absolute;
+inset: 0 auto auto 0;
+width: 100%;
+height: 100%;
+}
+.nexus-scanlines {
+position: absolute;
+inset: 0;
+pointer-events: none;
+background: repeating-linear-gradient(to bottom,
+transparent,
+transparent 3px,
+rgba(0, 0, 0, 0.38) 3px,
+rgba(0, 0, 0, 0.38) 6px);
+mix-blend-mode: multiply;
+}
+.nexus-vignette {
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+radial-gradient(circle at 50% 45%, transparent 34%, rgba(3, 0, 10, 0.78) 100%),
+linear-gradient(180deg, rgba(3, 0, 10, 0.12), rgba(3, 0, 10, 0.72));
+}
+.nexus-page-shell {
+position: relative;
+z-index: 10;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+}
+/* =========================================================
+04. FIXED HEADER / NAVIGATION
+========================================================= */
+.nexus-header {
+position: fixed;
+top: 1rem;
+left: 50%;
+z-index: 80;
+width: calc(100% - 2rem);
+max-width: 90rem;
+transform: translateX(-50%);
+padding: 0.65rem 0.75rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border: 1px solid rgba(255, 255, 255, 0.10);
+background:
+linear-gradient(180deg, rgba(255, 255, 255, 0.050), rgba(255, 255, 255, 0.012)),
+repeating-linear-gradient(45deg,
+rgba(255, 255, 255, 0.022) 0,
+rgba(255, 255, 255, 0.022) 1px,
+transparent 1px,
+transparent 8px),
+rgba(5, 0, 16, 0.84);
+backdrop-filter: blur(22px);
+box-shadow:
+0 22px 70px rgba(0, 0, 0, 0.38),
+inset 0 1px 0 rgba(255, 255, 255, 0.055);
+}
+@media (min-width: 1024px) {
+.nexus-header {
+padding-inline: 0.9rem;
+}
+}
+.nexus-logo-mark {
+position: relative;
+display: inline-flex;
+width: 2.5rem;
+height: 2.5rem;
+align-items: center;
+justify-content: center;
+border: 1px solid rgba(53, 221, 242, 0.42);
+background:
+linear-gradient(180deg, rgba(53, 221, 242, 0.13), rgba(53, 221, 242, 0.04));
+color: var(--nexus-cyan);
+box-shadow:
+0 0 22px rgba(53, 221, 242, 0.16),
+inset 0 0 18px rgba(53, 221, 242, 0.05);
+clip-path: polygon(0 9px, 9px 9px, 9px 0,
+calc(100% - 9px) 0, calc(100% - 9px) 9px, 100% 9px,
+100% calc(100% - 9px), calc(100% - 9px) calc(100% - 9px),
+calc(100% - 9px) 100%, 9px 100%, 9px calc(100% - 9px),
+0 calc(100% - 9px));
+transition: 300ms ease;
+}
+.nexus-logo-mark::after {
+content: "";
+position: absolute;
+top: -3px;
+right: -3px;
+width: 8px;
+height: 8px;
+background: var(--nexus-pink);
+box-shadow: 0 0 14px rgba(244, 91, 168, 0.85);
+}
+.nexus-logo:hover .nexus-logo-mark {
+border-color: rgba(232, 184, 93, 0.72);
+color: var(--nexus-gold);
+box-shadow:
+0 0 26px rgba(232, 184, 93, 0.18),
+inset 0 0 18px rgba(232, 184, 93, 0.06);
+}
+.nexus-nav {
+display: none;
+align-items: center;
+gap: 0.35rem;
+border: 1px solid rgba(255, 255, 255, 0.085);
+background: rgba(3, 0, 10, 0.48);
+padding: 0.38rem;
+}
+@media (min-width: 768px) {
+.nexus-nav {
+display: flex;
+}
+}
+.nexus-nav-link {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 0.48rem 0.78rem;
+font-size: 0.66rem;
+font-weight: 700;
+line-height: 1;
+text-transform: uppercase;
+letter-spacing: 0.18em;
+color: rgba(247, 242, 255, 0.54);
+transition: 250ms ease;
+}
+.nexus-nav-link:hover {
+color: var(--nexus-text);
+background: rgba(255, 255, 255, 0.055);
+}
+.nexus-nav-link.is-active {
+color: var(--nexus-cyan);
+border: 1px solid rgba(53, 221, 242, 0.26);
+background: rgba(53, 221, 242, 0.075);
+box-shadow: 0 0 16px rgba(53, 221, 242, 0.10);
+}
+.nexus-header-cta {
+display: none;
+align-items: center;
+justify-content: center;
+gap: 0.55rem;
+border: 1px solid rgba(232, 184, 93, 0.46);
+background: rgba(232, 184, 93, 0.055);
+color: var(--nexus-gold);
+padding: 0.78rem 1.1rem;
+font-size: 0.66rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.20em;
+transition: 280ms ease;
+}
+@media (min-width: 640px) {
+.nexus-header-cta {
+display: inline-flex;
+}
+}
+.nexus-header-cta:hover {
+background: var(--nexus-gold);
+color: var(--nexus-bg);
+box-shadow: 0 0 28px rgba(232, 184, 93, 0.26);
+}
+/* =========================================================
+05. HERO SECTION
+Clean static hero. No WebGL hero animation.
+========================================================= */
+.nexus-hero {
+position: relative;
+width: 100%;
+max-width: 90rem;
+min-height: 100vh;
+margin-inline: auto;
+padding: 10.5rem 1.5rem 8.5rem;
+display: grid;
+grid-template-columns: 1fr;
+align-items: center;
+gap: 4.5rem;
+isolation: isolate;
+}
+@media (min-width: 1024px) {
+.nexus-hero {
+grid-template-columns: minmax(0, 0.96fr) minmax(390px, 0.82fr);
+padding: 11.25rem 3rem 9.25rem;
+}
+}
+.nexus-hero::before {
+content: "";
+position: absolute;
+inset: 0;
+z-index: 0;
+pointer-events: none;
+background:
+radial-gradient(ellipse 44% 42% at 78% 44%, rgba(53, 221, 242, 0.14), transparent 72%),
+radial-gradient(ellipse 36% 38% at 86% 55%, rgba(244, 91, 168, 0.10), transparent 72%),
+radial-gradient(ellipse 44% 44% at 58% 72%, rgba(232, 184, 93, 0.055), transparent 74%),
+linear-gradient(90deg, rgba(2, 3, 10, 0.72), rgba(2, 3, 10, 0.20) 52%, rgba(2, 3, 10, 0.58));
+}
+.nexus-hero::after {
+content: "";
+position: absolute;
+inset: 7rem 0 3rem;
+z-index: 0;
+pointer-events: none;
+opacity: 0.28;
+background:
+linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+background-size: 42px 42px;
+mask-image: radial-gradient(circle at 70% 46%, black 0%, transparent 68%);
+}
+.nexus-hero-kicker {
+display: inline-flex;
+align-items: center;
+gap: 0.65rem;
+margin-bottom: 1.7rem;
+border: 1px solid rgba(53, 221, 242, 0.16);
+background: rgba(53, 221, 242, 0.032);
+padding: 0.54rem 0.72rem;
+color: rgba(53, 221, 242, 0.76);
+box-shadow: 0 0 18px rgba(53, 221, 242, 0.045);
+}
+.nexus-hero-kicker .kicker-symbol {
+color: rgba(53, 221, 242, 0.62);
+}
+.nexus-hero-title {
+color: var(--nexus-text);
+font-family: "VT323", monospace;
+font-size: clamp(4.7rem, 9vw, 8.4rem);
+line-height: 0.86;
+letter-spacing: -0.035em;
+text-transform: uppercase;
+text-shadow:
+0 0 12px rgba(255, 255, 255, 0.16),
+0 0 38px rgba(53, 221, 242, 0.08);
+}
+.nexus-hero-title .cyan {
+color: var(--nexus-cyan);
+text-shadow: 0 0 24px rgba(53, 221, 242, 0.42);
+}
+.nexus-hero-title .pink {
+color: var(--nexus-pink);
+text-shadow: 0 0 24px rgba(244, 91, 168, 0.42);
+}
+.word-collider {
+display: inline-block;
+vertical-align: top;
+}
+.nexus-hero-copy {
+margin-top: 2.1rem;
+max-width: 42rem;
+color: rgba(247, 242, 255, 0.70);
+font-size: clamp(0.98rem, 1.3vw, 1.12rem);
+line-height: 1.9;
+}
+.nexus-hero-actions {
+margin-top: 3rem;
+display: flex;
+flex-direction: column;
+gap: 1rem;
+}
+@media (min-width: 640px) {
+.nexus-hero-actions {
+flex-direction: row;
+}
+}
+.nexus-button-primary,
+.nexus-button-secondary {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 0.9rem;
+padding: 1rem 1.55rem;
+font-size: 0.78rem;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.20em;
+transition: 280ms ease;
+}
+.nexus-button-primary {
+border: 2px solid var(--nexus-cyan);
+background: rgba(2, 3, 10, 0.78);
+color: var(--nexus-cyan);
+box-shadow: 0 0 20px rgba(53, 221, 242, 0.14);
+}
+.nexus-button-primary:hover {
+transform: translateY(-2px);
+background: var(--nexus-cyan);
+color: var(--nexus-bg);
+box-shadow: 0 0 36px rgba(53, 221, 242, 0.38);
+}
+.nexus-button-secondary {
+border: 2px solid rgba(232, 184, 93, 0.42);
+background: rgba(232, 184, 93, 0.04);
+color: var(--nexus-gold);
+box-shadow: 0 0 18px rgba(232, 184, 93, 0.08);
+}
+.nexus-button-secondary:hover {
+transform: translateY(-2px);
+border-color: var(--nexus-gold);
+background: rgba(232, 184, 93, 0.09);
+box-shadow: 0 0 28px rgba(232, 184, 93, 0.20);
+}
+.nexus-hero-stats {
+margin-top: 2.2rem;
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+max-width: 38rem;
+border: 1px solid rgba(255, 255, 255, 0.08);
+background:
+linear-gradient(180deg, rgba(255, 255, 255, 0.034), rgba(255, 255, 255, 0.008)),
+rgba(7, 0, 20, 0.48);
+backdrop-filter: blur(14px);
+}
+.nexus-hero-stat {
+padding: 1rem;
+border-right: 1px solid rgba(255, 255, 255, 0.075);
+}
+.nexus-hero-stat:last-child {
+border-right: none;
+}
+.nexus-hero-stat-value {
+font-family: "VT323", monospace;
+font-size: 2.25rem;
+line-height: 1;
+}
+.nexus-hero-stat-label {
+margin-top: 0.35rem;
+color: rgba(247, 242, 255, 0.46);
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+}
+/* =========================================================
+06. HERO WORLD CORE — COMPLETE STATIC VISUAL
+Premium palette update
+========================================================= */
+.nexus-core-wrap {
+position: relative;
+z-index: 3;
+min-height: 560px;
+display: none;
+align-items: center;
+justify-content: center;
+}
+@media (min-width: 1024px) {
+.nexus-core-wrap {
+display: flex;
+}
+}
+.nexus-core-stage {
+position: relative;
+width: min(100%, 35.5rem);
+min-height: 35.5rem;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+border: 1px solid rgba(248, 243, 255, 0.085);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.046), rgba(248, 243, 255, 0.010)),
+radial-gradient(circle at 50% 42%, rgba(53, 221, 242, 0.12), transparent 44%),
+radial-gradient(circle at 70% 62%, rgba(244, 91, 168, 0.10), transparent 44%),
+radial-gradient(circle at 28% 72%, rgba(232, 184, 93, 0.07), transparent 42%),
+rgba(16, 10, 36, 0.38);
+backdrop-filter: blur(12px);
+box-shadow:
+0 0 80px rgba(0, 0, 0, 0.28),
+inset 0 0 70px rgba(53, 221, 242, 0.032);
+}
+.nexus-core-stage::before {
+content: "";
+position: absolute;
+inset: 0;
+opacity: 0.30;
+background:
+linear-gradient(rgba(248, 243, 255, 0.032) 1px, transparent 1px),
+linear-gradient(90deg, rgba(248, 243, 255, 0.024) 1px, transparent 1px);
+background-size: 34px 34px;
+}
+.nexus-core-stage::after {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+linear-gradient(90deg, rgba(2, 3, 10, 0.62), transparent 24%, transparent 76%, rgba(2, 3, 10, 0.62)),
+linear-gradient(180deg, transparent, rgba(2, 3, 10, 0.50));
+}
+.nexus-core-glow {
+position: absolute;
+width: 25rem;
+height: 25rem;
+border-radius: 999px;
+background:
+radial-gradient(circle, rgba(53, 221, 242, 0.18), transparent 58%),
+radial-gradient(circle at 68% 42%, rgba(244, 91, 168, 0.14), transparent 48%),
+radial-gradient(circle at 34% 70%, rgba(232, 184, 93, 0.11), transparent 44%);
+filter: blur(5px);
+opacity: 0.9;
+}
+.nexus-core-ring {
+position: absolute;
+z-index: 2;
+border-radius: 999px;
+border: 1px solid rgba(248, 243, 255, 0.09);
+animation: nexusCoreOrbit 18s linear infinite;
+}
+.nexus-core-ring.r1 {
+width: 27rem;
+height: 27rem;
+}
+.nexus-core-ring.r2 {
+width: 20rem;
+height: 20rem;
+border-color: rgba(53, 221, 242, 0.13);
+animation-duration: 12s;
+animation-direction: reverse;
+}
+.nexus-core-ring.r3 {
+width: 13.5rem;
+height: 13.5rem;
+border-color: rgba(232, 184, 93, 0.15);
+animation-duration: 9s;
+}
+.nexus-core-ring::before {
+content: "";
+position: absolute;
+top: 12%;
+left: 50%;
+width: 10px;
+height: 10px;
+background: var(--nexus-gold);
+box-shadow: 0 0 18px rgba(232, 184, 93, 0.9);
+}
+.nexus-core-ring.r2::before {
+background: var(--nexus-cyan);
+box-shadow: 0 0 18px rgba(53, 221, 242, 0.9);
+}
+.nexus-core-ring.r3::before {
+background: var(--nexus-pink);
+box-shadow: 0 0 18px rgba(244, 91, 168, 0.9);
+}
+.nexus-core-axis {
+position: absolute;
+z-index: 3;
+width: 31rem;
+height: 31rem;
+border-radius: 999px;
+opacity: 0.42;
+background:
+linear-gradient(90deg, transparent 49.8%, rgba(53, 221, 242, 0.22) 50%, transparent 50.2%),
+linear-gradient(0deg, transparent 49.8%, rgba(244, 91, 168, 0.18) 50%, transparent 50.2%);
+transform: rotate(-18deg);
+}
+.nexus-cube-scene {
+position: relative;
+z-index: 4;
+width: 260px;
+height: 260px;
+perspective: 950px;
+transform: translateY(-0.2rem);
+}
+.nexus-cube {
+position: absolute;
+inset: 36px;
+transform-style: preserve-3d;
+animation: nexusCubeRotate 18s linear infinite;
+}
+.nexus-cube-face {
+position: absolute;
+inset: 0;
+border: 1px solid rgba(53, 221, 242, 0.44);
+background:
+linear-gradient(135deg, rgba(53, 221, 242, 0.13), rgba(244, 91, 168, 0.065)),
+repeating-linear-gradient(0deg,
+rgba(248, 243, 255, 0.06),
+rgba(248, 243, 255, 0.06) 1px,
+transparent 1px,
+transparent 18px),
+repeating-linear-gradient(90deg,
+rgba(248, 243, 255, 0.045),
+rgba(248, 243, 255, 0.045) 1px,
+transparent 1px,
+transparent 18px);
+box-shadow:
+inset 0 0 34px rgba(53, 221, 242, 0.10),
+0 0 20px rgba(53, 221, 242, 0.18);
+opacity: 0.86;
+backface-visibility: visible;
+}
+.nexus-cube-face.front {
+transform: translateZ(94px);
+}
+.nexus-cube-face.back {
+transform: rotateY(180deg) translateZ(94px);
+border-color: rgba(244, 91, 168, 0.38);
+}
+.nexus-cube-face.right {
+transform: rotateY(90deg) translateZ(94px);
+border-color: rgba(232, 184, 93, 0.38);
+}
+.nexus-cube-face.left {
+transform: rotateY(-90deg) translateZ(94px);
+border-color: rgba(53, 221, 242, 0.38);
+}
+.nexus-cube-face.top {
+transform: rotateX(90deg) translateZ(94px);
+border-color: rgba(248, 243, 255, 0.28);
+}
+.nexus-cube-face.bottom {
+transform: rotateX(-90deg) translateZ(94px);
+border-color: rgba(94, 140, 255, 0.38);
+}
+.nexus-core-chip {
+position: absolute;
+z-index: 5;
+display: flex;
+align-items: center;
+gap: 0.55rem;
+min-width: 8.2rem;
+border: 1px solid rgba(248, 243, 255, 0.11);
+background: rgba(2, 3, 10, 0.68);
+backdrop-filter: blur(14px);
+padding: 0.7rem 0.82rem;
+color: rgba(248, 243, 255, 0.68);
+font-size: 0.58rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+box-shadow: 0 0 24px rgba(0, 0, 0, 0.20);
+}
+.nexus-core-chip::before {
+content: "";
+width: 7px;
+height: 7px;
+flex-shrink: 0;
+background: currentColor;
+box-shadow: 0 0 12px currentColor;
+}
+.nexus-core-chip.input {
+left: 1.2rem;
+top: 7rem;
+color: var(--nexus-cyan);
+}
+.nexus-core-chip.remix {
+right: 1.2rem;
+top: 12.4rem;
+color: var(--nexus-pink);
+}
+.nexus-core-chip.lock {
+right: 2rem;
+bottom: 9.2rem;
+color: var(--nexus-gold);
+}
+.nexus-core-chip.output {
+left: 1.4rem;
+bottom: 12.2rem;
+color: var(--nexus-blue);
+}
+.nexus-mini-particle {
+position: absolute;
+z-index: 5;
+width: 8px;
+height: 8px;
+background: var(--nexus-cyan);
+box-shadow: 0 0 14px rgba(53, 221, 242, 0.75);
+animation: nexusMiniFall 4.2s ease-in-out infinite;
+opacity: 0.82;
+}
+.nexus-mini-particle.p1 {
+top: 18%;
+right: 22%;
+animation-delay: 0s;
+}
+.nexus-mini-particle.p2 {
+top: 25%;
+right: 15%;
+background: var(--nexus-pink);
+box-shadow: 0 0 14px rgba(244, 91, 168, 0.75);
+animation-delay: -1.2s;
+}
+.nexus-mini-particle.p3 {
+top: 17%;
+right: 34%;
+background: var(--nexus-gold);
+box-shadow: 0 0 14px rgba(232, 184, 93, 0.75);
+animation-delay: -2.1s;
+}
+.nexus-mini-particle.p4 {
+top: 62%;
+right: 22%;
+background: var(--nexus-blue);
+box-shadow: 0 0 14px rgba(94, 140, 255, 0.75);
+animation-delay: -2.8s;
+}
+.nexus-mini-particle.p5 {
+top: 56%;
+left: 18%;
+background: var(--nexus-purple);
+box-shadow: 0 0 14px rgba(164, 119, 255, 0.75);
+animation-delay: -3.3s;
+}
+.nexus-core-side-panel {
+position: absolute;
+z-index: 6;
+right: 1.1rem;
+top: 1.1rem;
+width: 11rem;
+border: 1px solid rgba(232, 184, 93, 0.18);
+background:
+linear-gradient(180deg, rgba(232, 184, 93, 0.065), rgba(232, 184, 93, 0.018)),
+rgba(2, 3, 10, 0.64);
+backdrop-filter: blur(14px);
+padding: 0.9rem;
+box-shadow: 0 0 24px rgba(232, 184, 93, 0.07);
+}
+.nexus-core-panel {
+position: absolute;
+z-index: 6;
+left: 1.1rem;
+bottom: 1.1rem;
+width: 16rem;
+border: 1px solid rgba(53, 221, 242, 0.18);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.040), rgba(248, 243, 255, 0.010)),
+rgba(2, 3, 10, 0.76);
+backdrop-filter: blur(14px);
+padding: 1rem;
+box-shadow: 0 0 34px rgba(53, 221, 242, 0.08);
+}
+.nexus-core-panel-top {
+display: flex;
+align-items: center;
+justify-content: space-between;
+color: var(--nexus-cyan);
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.20em;
+text-transform: uppercase;
+}
+.nexus-core-meter {
+margin-top: 0.8rem;
+height: 0.45rem;
+border: 1px solid rgba(53, 221, 242, 0.20);
+background: rgba(53, 221, 242, 0.045);
+overflow: hidden;
+}
+.nexus-core-meter span {
+display: block;
+height: 100%;
+width: 87%;
+background: linear-gradient(90deg, var(--nexus-cyan), var(--nexus-pink), var(--nexus-gold));
+box-shadow: 0 0 16px rgba(244, 91, 168, 0.34);
+animation: nexusCoreMeter 3.8s ease-in-out infinite;
+}
+/* =========================================================
+07. SECTION 02 — CONVERSION CHAMBER
+Premium palette update
+========================================================= */
+.nexus-s2-frame {
+position: relative;
+overflow: hidden;
+border: 1px solid rgba(53, 221, 242, 0.18);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.052), rgba(248, 243, 255, 0.012)),
+radial-gradient(circle at 18% 22%, rgba(53, 221, 242, 0.12), transparent 34%),
+radial-gradient(circle at 82% 34%, rgba(244, 91, 168, 0.10), transparent 36%),
+radial-gradient(circle at 50% 100%, rgba(232, 184, 93, 0.07), transparent 38%),
+rgba(16, 10, 36, 0.76);
+box-shadow:
+0 0 90px rgba(0, 0, 0, 0.52),
+inset 0 1px 0 rgba(248, 243, 255, 0.06);
+clip-path: polygon(0 18px, 18px 18px, 18px 0,
+calc(100% - 18px) 0, calc(100% - 18px) 18px, 100% 18px,
+100% calc(100% - 18px), calc(100% - 18px) calc(100% - 18px),
+calc(100% - 18px) 100%, 18px 100%, 18px calc(100% - 18px),
+0 calc(100% - 18px));
+}
+.nexus-s2-frame::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+linear-gradient(rgba(53, 221, 242, 0.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(244, 91, 168, 0.035) 1px, transparent 1px);
+background-size: 44px 44px;
+opacity: 0.42;
+}
+.nexus-s2-frame::after {
+content: "";
+position: absolute;
+inset: 1px;
+pointer-events: none;
+border: 1px solid rgba(248, 243, 255, 0.045);
+clip-path: polygon(0 16px, 16px 16px, 16px 0,
+calc(100% - 16px) 0, calc(100% - 16px) 16px, 100% 16px,
+100% calc(100% - 16px), calc(100% - 16px) calc(100% - 16px),
+calc(100% - 16px) 100%, 16px 100%, 16px calc(100% - 16px),
+0 calc(100% - 16px));
+}
+.nexus-s2-corner {
+position: absolute;
+width: 24px;
+height: 24px;
+pointer-events: none;
+z-index: 3;
+}
+.nexus-s2-corner.tl {
+left: 20px;
+top: 20px;
+border-left: 2px solid var(--nexus-pink);
+border-top: 2px solid var(--nexus-pink);
+}
+.nexus-s2-corner.tr {
+right: 20px;
+top: 20px;
+border-right: 2px solid var(--nexus-cyan);
+border-top: 2px solid var(--nexus-cyan);
+}
+.nexus-s2-corner.bl {
+left: 20px;
+bottom: 20px;
+border-left: 2px solid var(--nexus-cyan);
+border-bottom: 2px solid var(--nexus-cyan);
+}
+.nexus-s2-corner.br {
+right: 20px;
+bottom: 20px;
+border-right: 2px solid var(--nexus-gold);
+border-bottom: 2px solid var(--nexus-gold);
+}
+.nexus-s2-title {
+max-width: 56rem;
+margin-inline: auto;
+font-family: "Space Grotesk", sans-serif;
+font-size: clamp(2.85rem, 5.15vw, 5.35rem);
+line-height: 0.92;
+letter-spacing: -0.066em;
+text-transform: uppercase;
+text-align: center;
+color: var(--nexus-text);
+}
+.nexus-s2-title .line-one {
+display: block;
+color: var(--nexus-text);
+text-shadow: 0 0 20px rgba(248, 243, 255, 0.14);
+white-space: nowrap;
+}
+.nexus-s2-title .line-two {
+display: block;
+color: var(--nexus-cyan);
+text-shadow: 0 0 28px rgba(53, 221, 242, 0.30);
+white-space: nowrap;
+}
+.nexus-s2-intro {
+margin-top: 1.6rem;
+max-width: 45rem;
+margin-inline: auto;
+text-align: center;
+color: rgba(248, 243, 255, 0.68);
+font-size: 0.98rem;
+line-height: 1.9;
+}
+.nexus-s2-content-grid {
+margin-top: 4rem;
+display: grid;
+gap: 2.4rem;
+align-items: start;
+}
+@media (min-width: 1024px) {
+.nexus-s2-content-grid {
+grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+gap: 3rem;
+}
+}
+.nexus-s2-left-stack {
+display: flex;
+flex-direction: column;
+gap: 1.4rem;
+}
+.nexus-s2-rail {
+display: grid;
+grid-template-columns: 1fr;
+gap: 1rem;
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+.nexus-s2-rail {
+grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+}
+@media (min-width: 1024px) {
+.nexus-s2-rail {
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 1rem;
+}
+}
+.nexus-s2-rail-item {
+position: relative;
+min-height: 170px;
+padding: 1.35rem;
+border: 1px solid rgba(248, 243, 255, 0.09);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.035), rgba(248, 243, 255, 0.008)),
+rgba(2, 3, 10, 0.54);
+box-shadow:
+0 0 28px rgba(0, 0, 0, 0.18),
+inset 0 1px 0 rgba(248, 243, 255, 0.045);
+}
+@media (min-width: 1024px) {
+.nexus-s2-rail-item {
+min-height: 246px;
+}
+}
+.nexus-s2-rail-item::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+linear-gradient(rgba(248, 243, 255, 0.026) 1px, transparent 1px),
+linear-gradient(90deg, rgba(248, 243, 255, 0.02) 1px, transparent 1px);
+background-size: 28px 28px;
+opacity: 0.34;
+}
+.nexus-s2-rail-index {
+position: relative;
+z-index: 1;
+font-family: "VT323", monospace;
+font-size: 2.7rem;
+line-height: 1;
+}
+.nexus-s2-rail-title {
+position: relative;
+z-index: 1;
+margin-top: 1.15rem;
+font-family: "Space Grotesk", sans-serif;
+font-size: 1.05rem;
+font-weight: 800;
+line-height: 1.25;
+letter-spacing: -0.035em;
+text-transform: uppercase;
+color: var(--nexus-text);
+}
+.nexus-s2-rail-copy {
+position: relative;
+z-index: 1;
+margin-top: 1rem;
+color: rgba(248, 243, 255, 0.50);
+font-size: 0.76rem;
+line-height: 1.75;
+}
+.nexus-s2-info-card {
+border: 1px solid rgba(53, 221, 242, 0.20);
+background:
+linear-gradient(180deg, rgba(53, 221, 242, 0.07), rgba(53, 221, 242, 0.025)),
+rgba(2, 3, 10, 0.46);
+padding: 1.35rem;
+box-shadow: 0 0 28px rgba(53, 221, 242, 0.07);
+}
+.nexus-s2-note {
+border: 1px solid rgba(232, 184, 93, 0.20);
+background:
+linear-gradient(180deg, rgba(232, 184, 93, 0.065), rgba(232, 184, 93, 0.022)),
+rgba(2, 3, 10, 0.40);
+padding: 1.35rem;
+box-shadow: 0 0 28px rgba(232, 184, 93, 0.05);
+}
+.nexus-s2-machine {
+position: relative;
+overflow: hidden;
+border: 1px solid rgba(53, 221, 242, 0.20);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.06), rgba(248, 243, 255, 0.015)),
+radial-gradient(circle at 50% 38%, rgba(53, 221, 242, 0.12), transparent 34%),
+radial-gradient(circle at 78% 58%, rgba(244, 91, 168, 0.10), transparent 36%),
+rgba(2, 3, 10, 0.64);
+padding: 1.25rem;
+box-shadow:
+0 0 60px rgba(53, 221, 242, 0.08),
+inset 0 1px 0 rgba(248, 243, 255, 0.06);
+}
+@media (min-width: 768px) {
+.nexus-s2-machine {
+padding: 1.65rem;
+}
+}
+.nexus-s2-machine-header {
+display: grid;
+grid-template-columns: 1fr auto;
+gap: 1rem;
+align-items: center;
+margin-bottom: 1.2rem;
+border: 1px solid rgba(248, 243, 255, 0.09);
+background: rgba(2, 3, 10, 0.52);
+padding: 1rem;
+}
+.nexus-s2-machine-title {
+margin-top: 0.25rem;
+font-family: "Space Grotesk", sans-serif;
+font-size: 1.18rem;
+font-weight: 800;
+letter-spacing: -0.04em;
+text-transform: uppercase;
+color: var(--nexus-text);
+}
+.nexus-s2-machine-status {
+display: inline-flex;
+align-items: center;
+gap: 0.45rem;
+border: 1px solid rgba(53, 221, 242, 0.26);
+background: rgba(53, 221, 242, 0.07);
+padding: 0.62rem 0.78rem;
+color: var(--nexus-cyan);
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+box-shadow: 0 0 18px rgba(53, 221, 242, 0.10);
+}
+.nexus-s2-machine-status span {
+width: 7px;
+height: 7px;
+background: var(--nexus-cyan);
+box-shadow: 0 0 12px rgba(53, 221, 242, 0.9);
+}
+.nexus-s2-monitor {
+position: relative;
+height: 560px;
+overflow: hidden;
+border: 1px solid rgba(248, 243, 255, 0.09);
+background:
+radial-gradient(circle at 50% 45%, rgba(244, 91, 168, 0.13), transparent 30%),
+radial-gradient(circle at 24% 28%, rgba(53, 221, 242, 0.12), transparent 30%),
+linear-gradient(180deg, rgba(16, 10, 36, 0.40), rgba(0, 0, 0, 0.28)),
+rgba(2, 3, 10, 0.78);
+}
+.nexus-s2-monitor::before {
+content: "";
+position: absolute;
+inset: 0;
+opacity: 0.38;
+background:
+linear-gradient(rgba(248, 243, 255, 0.035) 1px, transparent 1px),
+linear-gradient(90deg, rgba(248, 243, 255, 0.03) 1px, transparent 1px);
+background-size: 32px 32px;
+}
+.nexus-s2-monitor::after {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+linear-gradient(90deg, transparent, rgba(53, 221, 242, 0.06), transparent),
+linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.28) 100%);
+opacity: 0.7;
+}
+.nexus-s2-chamber {
+position: absolute;
+left: 50%;
+top: 44%;
+width: min(62%, 390px);
+aspect-ratio: 1;
+transform: translate(-50%, -50%);
+border: 1px solid rgba(244, 91, 168, 0.32);
+background:
+radial-gradient(circle, rgba(244, 91, 168, 0.16), transparent 58%),
+rgba(244, 91, 168, 0.035);
+box-shadow:
+0 0 60px rgba(244, 91, 168, 0.18),
+inset 0 0 40px rgba(244, 91, 168, 0.06);
+z-index: 2;
+}
+.nexus-s2-chamber::before,
+.nexus-s2-chamber::after {
+content: "";
+position: absolute;
+inset: 12%;
+border: 1px solid rgba(53, 221, 242, 0.16);
+}
+.nexus-s2-chamber::after {
+inset: 28%;
+border-color: rgba(232, 184, 93, 0.22);
+border-radius: 999px;
+}
+.nexus-s2-core {
+position: absolute;
+left: 50%;
+top: 50%;
+width: 7.2rem;
+height: 7.2rem;
+transform: translate(-50%, -50%);
+border: 1px solid rgba(244, 91, 168, 0.44);
+border-radius: 999px;
+background: rgba(244, 91, 168, 0.08);
+animation: nexusS2CorePulse 3s ease-in-out infinite;
+}
+.nexus-s2-core::before {
+content: "";
+position: absolute;
+left: 50%;
+top: 50%;
+width: 1rem;
+height: 1rem;
+transform: translate(-50%, -50%);
+background: white;
+box-shadow:
+0 0 26px rgba(244, 91, 168, 0.95),
+0 0 46px rgba(53, 221, 242, 0.32);
+}
+.nexus-s2-node {
+position: absolute;
+z-index: 4;
+display: flex;
+align-items: center;
+gap: 0.55rem;
+min-width: 150px;
+border: 1px solid rgba(248, 243, 255, 0.13);
+background: rgba(2, 3, 10, 0.72);
+backdrop-filter: blur(14px);
+padding: 0.75rem 0.85rem;
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: rgba(248, 243, 255, 0.72);
+box-shadow: 0 0 24px rgba(0, 0, 0, 0.22);
+}
+.nexus-s2-node::before {
+content: "";
+width: 7px;
+height: 7px;
+flex-shrink: 0;
+background: currentColor;
+box-shadow: 0 0 12px currentColor;
+}
+.nexus-s2-node.input {
+left: 7%;
+top: 19%;
+color: var(--nexus-cyan);
+}
+.nexus-s2-node.collision {
+right: 7%;
+top: 26%;
+color: var(--nexus-pink);
+}
+.nexus-s2-node.system {
+left: 8%;
+bottom: 20%;
+color: var(--nexus-gold);
+}
+.nexus-s2-node.output {
+right: 8%;
+bottom: 20%;
+color: var(--nexus-blue);
+}
+.nexus-s2-node.output,
+.nexus-s2-node.system {
+background: rgba(2, 3, 10, 0.82);
+}
+.nexus-s2-node-line {
+position: absolute;
+z-index: 1;
+height: 1px;
+background: linear-gradient(90deg, transparent, rgba(53, 221, 242, 0.34), transparent);
+opacity: 0.85;
+}
+.nexus-s2-node-line.one {
+left: 19%;
+top: 26%;
+width: 31%;
+transform: rotate(8deg);
+}
+.nexus-s2-node-line.two {
+right: 20%;
+top: 34%;
+width: 28%;
+background: linear-gradient(90deg, transparent, rgba(244, 91, 168, 0.35), transparent);
+transform: rotate(-10deg);
+}
+.nexus-s2-node-line.three {
+left: 20%;
+bottom: 26%;
+width: 31%;
+background: linear-gradient(90deg, transparent, rgba(232, 184, 93, 0.34), transparent);
+transform: rotate(-8deg);
+}
+.nexus-s2-node-line.four {
+right: 20%;
+bottom: 26%;
+width: 31%;
+background: linear-gradient(90deg, transparent, rgba(94, 140, 255, 0.36), transparent);
+transform: rotate(8deg);
+}
+.nexus-s2-flow-pixel {
+position: absolute;
+z-index: 5;
+width: 14px;
+height: 14px;
+background: var(--nexus-cyan);
+box-shadow: 0 0 14px rgba(53, 221, 242, 0.75);
+animation: nexusS2PixelFlow 7s linear infinite;
+animation-delay: var(--delay);
+}
+.nexus-s2-flow-pixel.pink {
+background: var(--nexus-pink);
+box-shadow: 0 0 14px rgba(244, 91, 168, 0.75);
+}
+.nexus-s2-flow-pixel.gold {
+background: var(--nexus-gold);
+box-shadow: 0 0 14px rgba(232, 184, 93, 0.75);
+}
+.nexus-s2-flow-pixel.blue {
+background: var(--nexus-blue);
+box-shadow: 0 0 14px rgba(94, 140, 255, 0.75);
+}
+.nexus-s2-console {
+position: absolute;
+z-index: 6;
+left: 0;
+right: 0;
+bottom: 0;
+border-top: 1px solid rgba(248, 243, 255, 0.09);
+background: rgba(2, 3, 10, 0.82);
+padding: 1.1rem;
+}
+.nexus-s2-meter-label {
+display: flex;
+justify-content: space-between;
+gap: 1rem;
+margin-bottom: 0.55rem;
+color: rgba(248, 243, 255, 0.50);
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+}
+.nexus-s2-meter {
+height: 0.45rem;
+border: 1px solid rgba(53, 221, 242, 0.22);
+background: rgba(53, 221, 242, 0.05);
+}
+.nexus-s2-meter span {
+display: block;
+height: 100%;
+width: 76%;
+background: linear-gradient(90deg, var(--nexus-cyan), var(--nexus-pink), var(--nexus-gold));
+box-shadow: 0 0 14px rgba(244, 91, 168, 0.38);
+animation: nexusS2Meter 3.6s ease-in-out infinite;
+}
+/* =========================================================
+08. SECTION 03 — GAME MODES
+Premium palette update
+========================================================= */
+.nexus-s3-section {
+position: relative;
+width: 100%;
+max-width: 90rem;
+margin-inline: auto;
+padding: 0 1.5rem 8rem;
+}
+@media (min-width: 1024px) {
+.nexus-s3-section {
+padding-inline: 3rem;
+padding-bottom: 10rem;
+}
+}
+.nexus-s3-catcher {
+position: relative;
+overflow: hidden;
+min-height: 820px;
+border-top: 1px solid rgba(244, 91, 168, 0.16);
+border-bottom: none;
+background:
+radial-gradient(circle at 24% 18%, rgba(244, 91, 168, 0.12), transparent 34%),
+radial-gradient(circle at 78% 36%, rgba(53, 221, 242, 0.10), transparent 36%),
+radial-gradient(circle at 50% 92%, rgba(232, 184, 93, 0.06), transparent 34%),
+linear-gradient(180deg, rgba(248, 243, 255, 0.018), rgba(248, 243, 255, 0.006));
+}
+.nexus-s3-catcher::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+linear-gradient(rgba(53, 221, 242, 0.038) 1px, transparent 1px),
+linear-gradient(90deg, rgba(244, 91, 168, 0.032) 1px, transparent 1px);
+background-size: 42px 42px;
+opacity: 0.42;
+}
+.nexus-s3-catcher::after {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+linear-gradient(90deg, rgba(2, 3, 10, 0.88), transparent 18%, transparent 82%, rgba(2, 3, 10, 0.88)),
+linear-gradient(180deg, rgba(2, 3, 10, 0.10), rgba(2, 3, 10, 0.58));
+}
+.nexus-s3-inner {
+position: relative;
+z-index: 2;
+padding: 6rem 0 0;
+}
+.nexus-s3-header {
+max-width: 58rem;
+margin-inline: auto;
+text-align: center;
+}
+.nexus-s3-eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 0.75rem;
+margin-bottom: 1.4rem;
+border: 1px solid rgba(244, 91, 168, 0.26);
+background: rgba(244, 91, 168, 0.06);
+padding: 0.6rem 0.85rem;
+color: var(--nexus-pink);
+box-shadow: 0 0 18px rgba(244, 91, 168, 0.10);
+}
+.nexus-s3-title {
+font-family: "Space Grotesk", sans-serif;
+font-size: clamp(2.85rem, 5.15vw, 5.35rem);
+line-height: 0.92;
+letter-spacing: -0.066em;
+text-transform: uppercase;
+color: var(--nexus-text);
+text-shadow: 0 0 20px rgba(248, 243, 255, 0.12);
+}
+.nexus-s3-title .line-one {
+display: block;
+color: var(--nexus-text);
+text-shadow: 0 0 20px rgba(248, 243, 255, 0.14);
+}
+.nexus-s3-title .line-two {
+display: block;
+color: var(--nexus-pink);
+text-shadow: 0 0 30px rgba(244, 91, 168, 0.34);
+}
+.nexus-s3-copy {
+max-width: 42rem;
+margin: 1.6rem auto 0;
+color: rgba(248, 243, 255, 0.66);
+font-size: 0.98rem;
+line-height: 1.9;
+}
+.nexus-s3-mode-grid {
+margin-top: 4.2rem;
+display: grid;
+gap: 1.2rem;
+}
+@media (min-width: 768px) {
+.nexus-s3-mode-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+}
+@media (min-width: 1180px) {
+.nexus-s3-mode-grid {
+grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+}
+.nexus-s3-card {
+position: relative;
+min-height: 520px;
+display: flex;
+flex-direction: column;
+overflow: hidden;
+border: 1px solid rgba(248, 243, 255, 0.12);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.052), rgba(248, 243, 255, 0.012)),
+rgba(2, 3, 10, 0.58);
+box-shadow:
+0 0 38px rgba(0, 0, 0, 0.28),
+inset 0 1px 0 rgba(248, 243, 255, 0.06);
+transition: transform 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+}
+.nexus-s3-card:hover {
+transform: translateY(-6px);
+}
+.nexus-s3-card::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+opacity: 0.42;
+background:
+linear-gradient(rgba(248, 243, 255, 0.025) 1px, transparent 1px),
+linear-gradient(90deg, rgba(248, 243, 255, 0.02) 1px, transparent 1px);
+background-size: 28px 28px;
+}
+.nexus-s3-card::after {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background: radial-gradient(circle at 50% 30%, var(--mode-glow), transparent 54%);
+opacity: 0.72;
+}
+.nexus-s3-card-content {
+position: relative;
+z-index: 2;
+display: flex;
+min-height: 100%;
+flex: 1;
+flex-direction: column;
+padding: 1.45rem;
+}
+.nexus-s3-card-top {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 1rem;
+}
+.nexus-s3-index {
+font-family: "VT323", monospace;
+font-size: 2.7rem;
+line-height: 1;
+}
+.nexus-s3-badge {
+border: 1px solid currentColor;
+background: rgba(2, 3, 10, 0.48);
+padding: 0.42rem 0.62rem;
+font-size: 0.58rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+opacity: 0.9;
+}
+.nexus-s3-icon-wrap {
+margin-top: 2.6rem;
+display: flex;
+height: 6rem;
+align-items: center;
+justify-content: center;
+}
+.nexus-s3-icon-wrap iconify-icon {
+font-size: 4.8rem;
+filter: drop-shadow(0 0 18px var(--mode-shadow));
+}
+.nexus-s3-card-title {
+margin-top: 2.5rem;
+font-family: "Space Grotesk", sans-serif;
+font-size: 1.55rem;
+line-height: 1.05;
+font-weight: 800;
+letter-spacing: -0.055em;
+text-transform: uppercase;
+}
+.nexus-s3-card-copy {
+margin-top: 1rem;
+color: rgba(248, 243, 255, 0.62);
+font-size: 0.84rem;
+line-height: 1.75;
+}
+.nexus-s3-meter-list {
+margin-top: auto;
+padding-top: 2rem;
+display: grid;
+gap: 0.85rem;
+}
+.nexus-s3-meter-row {
+display: grid;
+grid-template-columns: 5.2rem 1fr;
+align-items: center;
+gap: 1rem;
+}
+.nexus-s3-meter-row span {
+color: rgba(248, 243, 255, 0.44);
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+}
+.nexus-s3-meter-track {
+height: 0.45rem;
+border: 1px solid currentColor;
+background: rgba(248, 243, 255, 0.035);
+opacity: 0.86;
+}
+.nexus-s3-meter-fill {
+display: block;
+height: 100%;
+width: var(--meter-width);
+background: currentColor;
+box-shadow: 0 0 14px currentColor;
+animation: nexusS3Meter 3.4s ease-in-out infinite;
+animation-delay: var(--delay);
+transform-origin: left center;
+}
+.nexus-s3-action {
+position: relative;
+z-index: 2;
+margin-top: 1.4rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-top: 1px solid rgba(248, 243, 255, 0.09);
+background: rgba(2, 3, 10, 0.44);
+padding: 1rem 1.45rem;
+color: currentColor;
+font-size: 0.7rem;
+font-weight: 700;
+letter-spacing: 0.20em;
+text-transform: uppercase;
+}
+.nexus-s3-action span:first-child {
+display: inline-flex;
+align-items: center;
+gap: 0.6rem;
+}
+.nexus-s3-action span:first-child::before {
+content: ">";
+font-family: "VT323", monospace;
+font-size: 1.6rem;
+line-height: 0;
+}
+.nexus-s3-card.is-cyan {
+--mode-glow: rgba(53, 221, 242, 0.16);
+--mode-shadow: rgba(53, 221, 242, 0.75);
+color: var(--nexus-cyan);
+border-color: rgba(53, 221, 242, 0.36);
+}
+.nexus-s3-card.is-pink {
+--mode-glow: rgba(244, 91, 168, 0.16);
+--mode-shadow: rgba(244, 91, 168, 0.75);
+color: var(--nexus-pink);
+border-color: rgba(244, 91, 168, 0.34);
+}
+.nexus-s3-card.is-purple {
+--mode-glow: rgba(164, 119, 255, 0.16);
+--mode-shadow: rgba(164, 119, 255, 0.75);
+color: var(--nexus-purple);
+border-color: rgba(164, 119, 255, 0.34);
+}
+.nexus-s3-card.is-blue {
+--mode-glow: rgba(94, 140, 255, 0.18);
+--mode-shadow: rgba(94, 140, 255, 0.75);
+color: var(--nexus-blue);
+border-color: rgba(94, 140, 255, 0.36);
+}
+.nexus-s3-card.is-selected {
+box-shadow:
+0 0 44px rgba(53, 221, 242, 0.16),
+inset 0 1px 0 rgba(248, 243, 255, 0.075);
+}
+.nexus-s3-footer-row {
+margin-top: 1.8rem;
+display: grid;
+gap: 1rem;
+}
+@media (min-width: 1024px) {
+.nexus-s3-footer-row {
+grid-template-columns: 1fr 0.48fr;
+}
+}
+.nexus-s3-tip,
+.nexus-s3-rank {
+border: 1px solid rgba(248, 243, 255, 0.10);
+background: rgba(2, 3, 10, 0.42);
+padding: 1.25rem;
+backdrop-filter: blur(12px);
+}
+.nexus-s3-rank {
+border-color: rgba(232, 184, 93, 0.22);
+background:
+radial-gradient(circle at 82% 50%, rgba(232, 184, 93, 0.12), transparent 36%),
+rgba(232, 184, 93, 0.045);
+}
+/* =========================================================
+09. SECTION 04 — COLLISION ENGINE
+Premium palette update
+========================================================= */
+.nexus-s4-section {
+position: relative;
+width: 100%;
+max-width: 90rem;
+margin-inline: auto;
+padding: 0 1.5rem 8rem;
+}
+@media (min-width: 1024px) {
+.nexus-s4-section {
+padding-inline: 3rem;
+padding-bottom: 10rem;
+}
+}
+.nexus-s4-catcher {
+position: relative;
+overflow: hidden;
+min-height: 880px;
+border-top: 1px solid rgba(232, 184, 93, 0.14);
+border-bottom: none;
+background:
+radial-gradient(circle at 18% 24%, rgba(232, 184, 93, 0.10), transparent 34%),
+radial-gradient(circle at 72% 34%, rgba(53, 221, 242, 0.09), transparent 38%),
+radial-gradient(circle at 52% 82%, rgba(244, 91, 168, 0.075), transparent 34%),
+linear-gradient(180deg, rgba(248, 243, 255, 0.016), rgba(248, 243, 255, 0.005));
+}
+.nexus-s4-catcher::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+linear-gradient(rgba(232, 184, 93, 0.026) 1px, transparent 1px),
+linear-gradient(90deg, rgba(53, 221, 242, 0.024) 1px, transparent 1px);
+background-size: 42px 42px;
+opacity: 0.32;
+}
+.nexus-s4-catcher::after {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+linear-gradient(90deg, rgba(2, 3, 10, 0.76), transparent 18%, transparent 82%, rgba(2, 3, 10, 0.76)),
+linear-gradient(180deg, rgba(2, 3, 10, 0.06), rgba(2, 3, 10, 0.48));
+}
+.nexus-s4-inner {
+position: relative;
+z-index: 2;
+padding: 6.2rem 0 0;
+}
+.nexus-s4-layout {
+display: grid;
+gap: 3rem;
+align-items: start;
+}
+@media (min-width: 1024px) {
+.nexus-s4-layout {
+grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+gap: 3.4rem;
+}
+}
+.nexus-s4-eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 0.75rem;
+margin-bottom: 1.4rem;
+border: 1px solid rgba(232, 184, 93, 0.24);
+background: rgba(232, 184, 93, 0.045);
+padding: 0.6rem 0.85rem;
+color: var(--nexus-gold);
+box-shadow: 0 0 18px rgba(232, 184, 93, 0.08);
+}
+.nexus-s4-title {
+font-family: "Space Grotesk", sans-serif;
+font-size: clamp(2.85rem, 5.15vw, 5.35rem);
+line-height: 0.92;
+letter-spacing: -0.066em;
+text-transform: uppercase;
+color: var(--nexus-text);
+text-shadow: 0 0 20px rgba(248, 243, 255, 0.12);
+}
+.nexus-s4-title .line-one {
+display: block;
+color: var(--nexus-text);
+text-shadow: 0 0 20px rgba(248, 243, 255, 0.14);
+}
+.nexus-s4-title .line-two {
+display: block;
+color: var(--nexus-gold);
+text-shadow: 0 0 30px rgba(232, 184, 93, 0.32);
+}
+.nexus-s4-copy {
+margin-top: 1.7rem;
+max-width: 38rem;
+color: rgba(248, 243, 255, 0.66);
+font-size: 0.98rem;
+line-height: 1.9;
+}
+.nexus-s4-process {
+margin-top: 2.6rem;
+display: grid;
+gap: 1rem;
+}
+.nexus-s4-process-card {
+position: relative;
+overflow: hidden;
+border: 1px solid rgba(248, 243, 255, 0.095);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.040), rgba(248, 243, 255, 0.008)),
+rgba(2, 3, 10, 0.48);
+padding: 1.25rem;
+box-shadow:
+0 0 28px rgba(0, 0, 0, 0.18),
+inset 0 1px 0 rgba(248, 243, 255, 0.040);
+}
+.nexus-s4-process-card::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+opacity: 0.14;
+background:
+linear-gradient(rgba(248, 243, 255, 0.018) 1px, transparent 1px),
+linear-gradient(90deg, rgba(248, 243, 255, 0.014) 1px, transparent 1px);
+background-size: 34px 34px;
+}
+.nexus-s4-process-card-inner {
+position: relative;
+z-index: 2;
+display: flex;
+gap: 1rem;
+align-items: flex-start;
+}
+.nexus-s4-process-index {
+flex-shrink: 0;
+font-family: "VT323", monospace;
+font-size: 2.8rem;
+line-height: 1;
+}
+.nexus-s4-process-title {
+font-family: "Space Grotesk", sans-serif;
+font-size: 1.22rem;
+line-height: 1.1;
+font-weight: 800;
+letter-spacing: -0.045em;
+text-transform: uppercase;
+}
+.nexus-s4-process-copy {
+margin-top: 0.6rem;
+color: rgba(248, 243, 255, 0.56);
+font-size: 0.84rem;
+line-height: 1.75;
+}
+.nexus-s4-process-card.is-cyan {
+border-color: rgba(53, 221, 242, 0.20);
+background:
+linear-gradient(180deg, rgba(53, 221, 242, 0.045), rgba(53, 221, 242, 0.010)),
+rgba(2, 3, 10, 0.48);
+}
+.nexus-s4-process-card.is-cyan .nexus-s4-process-index,
+.nexus-s4-process-card.is-cyan .nexus-s4-process-title {
+color: var(--nexus-cyan);
+}
+.nexus-s4-process-card.is-pink {
+border-color: rgba(244, 91, 168, 0.20);
+background:
+linear-gradient(180deg, rgba(244, 91, 168, 0.045), rgba(244, 91, 168, 0.010)),
+rgba(2, 3, 10, 0.48);
+}
+.nexus-s4-process-card.is-pink .nexus-s4-process-index,
+.nexus-s4-process-card.is-pink .nexus-s4-process-title {
+color: var(--nexus-pink);
+}
+.nexus-s4-process-card.is-gold {
+border-color: rgba(232, 184, 93, 0.22);
+background:
+linear-gradient(180deg, rgba(232, 184, 93, 0.050), rgba(232, 184, 93, 0.012)),
+rgba(2, 3, 10, 0.48);
+}
+.nexus-s4-process-card.is-gold .nexus-s4-process-index,
+.nexus-s4-process-card.is-gold .nexus-s4-process-title {
+color: var(--nexus-gold);
+}
+.nexus-s4-machine {
+position: relative;
+overflow: hidden;
+border: 1px solid rgba(232, 184, 93, 0.20);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.052), rgba(248, 243, 255, 0.012)),
+radial-gradient(circle at 50% 38%, rgba(232, 184, 93, 0.12), transparent 34%),
+radial-gradient(circle at 22% 22%, rgba(53, 221, 242, 0.10), transparent 34%),
+radial-gradient(circle at 82% 68%, rgba(244, 91, 168, 0.09), transparent 34%),
+rgba(2, 3, 10, 0.62);
+padding: 1.25rem;
+box-shadow:
+0 0 60px rgba(232, 184, 93, 0.075),
+inset 0 1px 0 rgba(248, 243, 255, 0.055);
+}
+@media (min-width: 768px) {
+.nexus-s4-machine {
+padding: 1.65rem;
+}
+}
+.nexus-s4-machine-header {
+display: grid;
+grid-template-columns: 1fr auto;
+gap: 1rem;
+align-items: center;
+margin-bottom: 1.2rem;
+border: 1px solid rgba(248, 243, 255, 0.10);
+background: rgba(2, 3, 10, 0.52);
+padding: 1rem;
+}
+.nexus-s4-status-title {
+margin-top: 0.25rem;
+font-family: "Space Grotesk", sans-serif;
+font-size: 1.18rem;
+font-weight: 800;
+letter-spacing: -0.04em;
+text-transform: uppercase;
+color: var(--nexus-text);
+}
+.nexus-s4-status-badge {
+display: inline-flex;
+align-items: center;
+gap: 0.45rem;
+border: 1px solid rgba(232, 184, 93, 0.26);
+background: rgba(232, 184, 93, 0.07);
+padding: 0.62rem 0.78rem;
+color: var(--nexus-gold);
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+box-shadow: 0 0 18px rgba(232, 184, 93, 0.10);
+}
+.nexus-s4-status-badge span {
+width: 7px;
+height: 7px;
+background: var(--nexus-gold);
+box-shadow: 0 0 12px rgba(232, 184, 93, 0.9);
+}
+.nexus-s4-monitor {
+position: relative;
+height: 560px;
+overflow: hidden;
+border: 1px solid rgba(248, 243, 255, 0.085);
+background:
+radial-gradient(circle at 50% 48%, rgba(232, 184, 93, 0.12), transparent 30%),
+radial-gradient(circle at 28% 28%, rgba(53, 221, 242, 0.10), transparent 30%),
+radial-gradient(circle at 78% 62%, rgba(244, 91, 168, 0.09), transparent 32%),
+linear-gradient(180deg, rgba(16, 10, 36, 0.40), rgba(0, 0, 0, 0.28)),
+rgba(2, 3, 10, 0.78);
+}
+.nexus-s4-monitor::before {
+content: "";
+position: absolute;
+inset: 0;
+opacity: 0.34;
+background:
+linear-gradient(rgba(248, 243, 255, 0.030) 1px, transparent 1px),
+linear-gradient(90deg, rgba(248, 243, 255, 0.024) 1px, transparent 1px);
+background-size: 32px 32px;
+}
+.nexus-s4-monitor::after {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+radial-gradient(circle at 50% 48%, transparent 0%, rgba(2, 3, 10, 0.18) 52%, rgba(2, 3, 10, 0.44) 100%),
+linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.25) 100%);
+opacity: 0.66;
+}
+.nexus-s4-core-field {
+position: absolute;
+z-index: 2;
+left: 50%;
+top: 46%;
+width: min(62%, 390px);
+aspect-ratio: 1;
+transform: translate(-50%, -50%);
+}
+.nexus-s4-ring {
+position: absolute;
+inset: 0;
+border: 1px solid rgba(232, 184, 93, 0.18);
+border-radius: 999px;
+animation: nexusS4Ring 12s linear infinite;
+}
+.nexus-s4-ring:nth-child(2) {
+inset: 14%;
+border-color: rgba(53, 221, 242, 0.16);
+animation-duration: 8s;
+animation-direction: reverse;
+}
+.nexus-s4-ring:nth-child(3) {
+inset: 28%;
+border-color: rgba(244, 91, 168, 0.20);
+animation-duration: 6s;
+}
+.nexus-s4-core {
+position: absolute;
+left: 50%;
+top: 50%;
+width: 7rem;
+height: 7rem;
+transform: translate(-50%, -50%);
+border: 1px solid rgba(232, 184, 93, 0.42);
+border-radius: 999px;
+background:
+radial-gradient(circle, rgba(232, 184, 93, 0.16), rgba(232, 184, 93, 0.04) 48%, transparent 72%);
+animation: nexusS4CorePulse 3.4s ease-in-out infinite;
+}
+.nexus-s4-core::before {
+content: "";
+position: absolute;
+left: 50%;
+top: 50%;
+width: 1rem;
+height: 1rem;
+transform: translate(-50%, -50%);
+background: white;
+box-shadow:
+0 0 28px rgba(232, 184, 93, 0.95),
+0 0 46px rgba(244, 91, 168, 0.30);
+}
+.nexus-s4-core::after {
+content: "";
+position: absolute;
+left: 50%;
+top: 50%;
+width: 12rem;
+height: 1px;
+transform: translate(-50%, -50%) rotate(-24deg);
+background: linear-gradient(90deg, transparent, rgba(53, 221, 242, 0.38), rgba(232, 184, 93, 0.34), transparent);
+box-shadow: 0 0 18px rgba(53, 221, 242, 0.18);
+}
+.nexus-s4-orbit-dot {
+position: absolute;
+z-index: 3;
+width: 9px;
+height: 9px;
+background: currentColor;
+box-shadow: 0 0 14px currentColor;
+}
+.nexus-s4-orbit-dot.d1 {
+left: 20%;
+top: 34%;
+color: var(--nexus-cyan);
+}
+.nexus-s4-orbit-dot.d2 {
+right: 24%;
+top: 28%;
+color: var(--nexus-pink);
+}
+.nexus-s4-orbit-dot.d3 {
+right: 30%;
+bottom: 24%;
+color: var(--nexus-gold);
+}
+.nexus-s4-orbit-dot.d4 {
+left: 27%;
+bottom: 30%;
+color: var(--nexus-blue);
+}
+.nexus-s4-monitor-label {
+position: absolute;
+z-index: 4;
+display: flex;
+align-items: center;
+gap: 0.55rem;
+min-width: 132px;
+border: 1px solid rgba(248, 243, 255, 0.13);
+background: rgba(2, 3, 10, 0.74);
+backdrop-filter: blur(14px);
+padding: 0.75rem 0.85rem;
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: rgba(248, 243, 255, 0.72);
+box-shadow: 0 0 24px rgba(0, 0, 0, 0.22);
+}
+.nexus-s4-monitor-label::before {
+content: "";
+width: 7px;
+height: 7px;
+flex-shrink: 0;
+background: currentColor;
+box-shadow: 0 0 12px currentColor;
+}
+.nexus-s4-monitor-label.color {
+left: 7%;
+top: 18%;
+color: var(--nexus-cyan);
+}
+.nexus-s4-monitor-label.type {
+right: 7%;
+top: 22%;
+color: var(--nexus-pink);
+}
+.nexus-s4-monitor-label.motion {
+left: 8%;
+bottom: 21%;
+color: var(--nexus-gold);
+}
+.nexus-s4-monitor-label.system {
+right: 8%;
+bottom: 21%;
+color: var(--nexus-blue);
+}
+.nexus-s4-console {
+position: absolute;
+z-index: 6;
+left: 0;
+right: 0;
+bottom: 0;
+border-top: 1px solid rgba(248, 243, 255, 0.085);
+background: rgba(2, 3, 10, 0.80);
+padding: 1.1rem;
+}
+.nexus-s4-console-grid {
+display: grid;
+gap: 1rem;
+}
+@media (min-width: 768px) {
+.nexus-s4-console-grid {
+grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+}
+.nexus-s4-signal-label {
+display: flex;
+justify-content: space-between;
+gap: 1rem;
+margin-bottom: 0.55rem;
+color: rgba(248, 243, 255, 0.50);
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+}
+.nexus-s4-signal-track {
+height: 0.45rem;
+border: 1px solid currentColor;
+background: rgba(248, 243, 255, 0.035);
+}
+.nexus-s4-signal-fill {
+display: block;
+height: 100%;
+width: var(--signal-width);
+background: currentColor;
+box-shadow: 0 0 14px currentColor;
+animation: nexusS4Signal 3.4s ease-in-out infinite;
+animation-delay: var(--delay);
+transform-origin: left center;
+}
+@keyframes nexusS4Ring {
+from {
+transform: rotate(0deg);
+}
+to {
+transform: rotate(360deg);
+}
+}
+@media (max-width: 640px) {
+.nexus-s4-title {
+font-size: clamp(2.55rem, 12vw, 3.7rem);
+letter-spacing: -0.055em;
+}
+.nexus-s4-monitor {
+height: 520px;
+}
+.nexus-s4-monitor-label {
+min-width: auto;
+font-size: 0.55rem;
+padding: 0.62rem 0.65rem;
+}
+}
+/* =========================================================
+10. SECTION 05 — HIGH SCORES
+Premium palette update
+========================================================= */
+.nexus-s5-section {
+position: relative;
+width: 100%;
+max-width: 90rem;
+margin-inline: auto;
+padding: 0 1.5rem 8rem;
+}
+@media (min-width: 1024px) {
+.nexus-s5-section {
+padding-inline: 3rem;
+padding-bottom: 10rem;
+}
+}
+.nexus-s5-stage {
+position: relative;
+overflow: hidden;
+min-height: 840px;
+border-top: 1px solid rgba(53, 221, 242, 0.14);
+border-bottom: none;
+background:
+radial-gradient(circle at 20% 18%, rgba(53, 221, 242, 0.11), transparent 34%),
+radial-gradient(circle at 78% 34%, rgba(94, 140, 255, 0.10), transparent 36%),
+radial-gradient(circle at 48% 88%, rgba(244, 91, 168, 0.065), transparent 34%),
+linear-gradient(180deg, rgba(248, 243, 255, 0.014), rgba(248, 243, 255, 0.004));
+}
+.nexus-s5-stage::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+opacity: 0.34;
+background:
+linear-gradient(rgba(53, 221, 242, 0.030) 1px, transparent 1px),
+linear-gradient(90deg, rgba(94, 140, 255, 0.026) 1px, transparent 1px);
+background-size: 42px 42px;
+}
+.nexus-s5-stage::after {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+linear-gradient(90deg, rgba(2, 3, 10, 0.84), transparent 16%, transparent 84%, rgba(2, 3, 10, 0.84)),
+linear-gradient(180deg, rgba(2, 3, 10, 0.06), rgba(2, 3, 10, 0.48));
+}
+.nexus-s5-inner {
+position: relative;
+z-index: 2;
+padding: 6rem 0 0;
+}
+.nexus-s5-header {
+display: grid;
+gap: 2.5rem;
+align-items: end;
+}
+@media (min-width: 1024px) {
+.nexus-s5-header {
+grid-template-columns: 0.82fr 1.18fr;
+}
+}
+.nexus-s5-eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 0.75rem;
+margin-bottom: 1.4rem;
+border: 1px solid rgba(53, 221, 242, 0.26);
+background: rgba(53, 221, 242, 0.055);
+padding: 0.6rem 0.85rem;
+color: var(--nexus-cyan);
+box-shadow: 0 0 18px rgba(53, 221, 242, 0.10);
+}
+.nexus-s5-title {
+font-family: "Space Grotesk", sans-serif;
+font-size: clamp(2.85rem, 5.15vw, 5.35rem);
+line-height: 0.92;
+letter-spacing: -0.066em;
+text-transform: uppercase;
+color: var(--nexus-text);
+text-shadow: 0 0 20px rgba(248, 243, 255, 0.12);
+}
+.nexus-s5-title .line-one {
+display: block;
+color: var(--nexus-text);
+text-shadow: 0 0 20px rgba(248, 243, 255, 0.14);
+}
+.nexus-s5-title .line-two {
+display: block;
+color: var(--nexus-cyan);
+text-shadow: 0 0 30px rgba(53, 221, 242, 0.34);
+}
+.nexus-s5-copy {
+max-width: 42rem;
+color: rgba(248, 243, 255, 0.66);
+font-size: 0.98rem;
+line-height: 1.9;
+}
+.nexus-s5-tags {
+margin-top: 1.5rem;
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+}
+.nexus-s5-tag {
+border: 1px solid currentColor;
+background: rgba(2, 3, 10, 0.42);
+padding: 0.62rem 0.85rem;
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+opacity: 0.86;
+}
+.nexus-s5-metrics {
+margin-top: 4rem;
+display: grid;
+gap: 1rem;
+}
+@media (min-width: 768px) {
+.nexus-s5-metrics {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+}
+@media (min-width: 1180px) {
+.nexus-s5-metrics {
+grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+}
+.nexus-s5-metric-card {
+position: relative;
+overflow: hidden;
+min-height: 235px;
+border: 1px solid rgba(248, 243, 255, 0.105);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.046), rgba(248, 243, 255, 0.01)),
+rgba(2, 3, 10, 0.44);
+padding: 1.35rem;
+box-shadow:
+0 0 34px rgba(0, 0, 0, 0.22),
+inset 0 1px 0 rgba(248, 243, 255, 0.055);
+}
+.nexus-s5-metric-card::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+opacity: 0.30;
+background:
+linear-gradient(rgba(248, 243, 255, 0.026) 1px, transparent 1px),
+linear-gradient(90deg, rgba(248, 243, 255, 0.02) 1px, transparent 1px);
+background-size: 28px 28px;
+}
+.nexus-s5-metric-card::after {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background: radial-gradient(circle at 50% 20%, var(--metric-glow), transparent 56%);
+opacity: 0.72;
+}
+.nexus-s5-metric-inner {
+position: relative;
+z-index: 2;
+}
+.nexus-s5-metric-top {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 1rem;
+}
+.nexus-s5-dot {
+width: 0.65rem;
+height: 0.65rem;
+background: currentColor;
+box-shadow: 0 0 14px currentColor;
+animation: nexusS5Dot 1.8s ease-in-out infinite;
+animation-delay: var(--delay);
+}
+.nexus-s5-metric-label {
+font-size: 0.65rem;
+font-weight: 700;
+letter-spacing: 0.24em;
+text-transform: uppercase;
+color: currentColor;
+opacity: 0.78;
+}
+.nexus-s5-number {
+margin-top: 2.3rem;
+font-family: "VT323", monospace;
+font-size: clamp(4.5rem, 7vw, 6.8rem);
+line-height: 0.82;
+color: currentColor;
+text-shadow: 0 0 24px currentColor;
+}
+.nexus-s5-caption {
+margin-top: 1rem;
+color: rgba(248, 243, 255, 0.44);
+font-size: 0.66rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+}
+.nexus-s5-metric-card.is-cyan {
+--metric-glow: rgba(53, 221, 242, 0.14);
+color: var(--nexus-cyan);
+border-color: rgba(53, 221, 242, 0.26);
+}
+.nexus-s5-metric-card.is-blue {
+--metric-glow: rgba(94, 140, 255, 0.16);
+color: var(--nexus-blue);
+border-color: rgba(94, 140, 255, 0.30);
+}
+.nexus-s5-metric-card.is-pink {
+--metric-glow: rgba(244, 91, 168, 0.13);
+color: var(--nexus-pink);
+border-color: rgba(244, 91, 168, 0.26);
+}
+.nexus-s5-metric-card.is-purple {
+--metric-glow: rgba(164, 119, 255, 0.15);
+color: var(--nexus-purple);
+border-color: rgba(164, 119, 255, 0.28);
+}
+.nexus-s5-board-grid {
+margin-top: 1.25rem;
+display: grid;
+gap: 1rem;
+}
+@media (min-width: 1024px) {
+.nexus-s5-board-grid {
+grid-template-columns: 1.28fr 0.72fr;
+}
+}
+.nexus-s5-leaderboard,
+.nexus-s5-current-run {
+overflow: hidden;
+border: 1px solid rgba(53, 221, 242, 0.115);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.036), rgba(248, 243, 255, 0.008)),
+rgba(2, 3, 10, 0.48);
+backdrop-filter: blur(12px);
+box-shadow: 0 0 44px rgba(0, 0, 0, 0.22);
+}
+.nexus-s5-leaderboard-head {
+display: grid;
+grid-template-columns: 70px 1fr 180px 140px;
+border-bottom: 1px solid rgba(53, 221, 242, 0.20);
+background: rgba(53, 221, 242, 0.055);
+padding: 1rem 1.25rem;
+font-family: "Space Grotesk", sans-serif;
+font-size: 0.7rem;
+font-weight: 800;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+color: var(--nexus-cyan);
+}
+.nexus-s5-row {
+position: relative;
+overflow: hidden;
+display: grid;
+grid-template-columns: 70px 1fr 180px 140px;
+align-items: center;
+border-bottom: 1px solid rgba(248, 243, 255, 0.08);
+padding: 1.25rem;
+transition: 260ms ease;
+}
+.nexus-s5-row:last-child {
+border-bottom: none;
+}
+.nexus-s5-row:hover {
+background: rgba(53, 221, 242, 0.035);
+}
+.nexus-s5-row::before {
+content: "";
+position: absolute;
+inset-y: 0;
+left: -30%;
+width: 28%;
+background: linear-gradient(90deg, transparent, rgba(53, 221, 242, 0.08), transparent);
+opacity: 0;
+transition: 340ms ease;
+}
+.nexus-s5-row:hover::before {
+left: 100%;
+opacity: 1;
+}
+.nexus-s5-rank-number {
+font-family: "VT323", monospace;
+font-size: 2.35rem;
+line-height: 1;
+}
+.nexus-s5-player-name {
+font-family: "Space Grotesk", sans-serif;
+font-size: 1.08rem;
+line-height: 1;
+font-weight: 800;
+letter-spacing: -0.035em;
+text-transform: uppercase;
+color: var(--nexus-text);
+}
+.nexus-s5-player-meta {
+margin-top: 0.45rem;
+font-size: 0.68rem;
+font-weight: 700;
+letter-spacing: 0.17em;
+text-transform: uppercase;
+color: rgba(248, 243, 255, 0.38);
+}
+.nexus-s5-run-type {
+font-size: 0.68rem;
+font-weight: 800;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+}
+.nexus-s5-score {
+text-align: right;
+font-family: "VT323", monospace;
+font-size: 3rem;
+line-height: 1;
+}
+.nexus-s5-run-panel {
+padding: 1.45rem;
+}
+.nexus-s5-run-icon {
+display: flex;
+width: 3.6rem;
+height: 3.6rem;
+align-items: center;
+justify-content: center;
+border: 1px solid rgba(53, 221, 242, 0.45);
+color: var(--nexus-cyan);
+box-shadow: 0 0 20px rgba(53, 221, 242, 0.16);
+}
+.nexus-s5-progress-group {
+margin-top: 2rem;
+display: grid;
+gap: 1.3rem;
+}
+.nexus-s5-progress-label {
+margin-bottom: 0.55rem;
+display: flex;
+align-items: center;
+justify-content: space-between;
+color: rgba(248, 243, 255, 0.48);
+font-size: 0.65rem;
+font-weight: 700;
+letter-spacing: 0.20em;
+text-transform: uppercase;
+}
+.nexus-s5-progress-track {
+height: 0.55rem;
+border: 1px solid currentColor;
+background: rgba(248, 243, 255, 0.035);
+overflow: hidden;
+}
+.nexus-s5-progress-fill {
+display: block;
+width: var(--target-width);
+height: 100%;
+background: currentColor;
+box-shadow: 0 0 14px currentColor;
+transform: scaleX(0);
+transform-origin: left center;
+}
+.nexus-s5-progress-fill.is-animated {
+animation: nexusS5Progress 2.2s cubic-bezier(.2, .8, .2, 1) forwards,
+nexusS5Pulse 3.2s ease-in-out infinite 2.2s;
+animation-delay: var(--delay), calc(2.2s + var(--delay));
+}
+.nexus-s5-bonus {
+margin-top: 2rem;
+border: 1px solid rgba(244, 91, 168, 0.20);
+background:
+radial-gradient(circle at 82% 20%, rgba(244, 91, 168, 0.10), transparent 36%),
+rgba(244, 91, 168, 0.035);
+padding: 1.25rem;
+}
+.nexus-s5-bonus-title {
+font-family: "Space Grotesk", sans-serif;
+font-size: 1.55rem;
+line-height: 1;
+font-weight: 800;
+letter-spacing: -0.055em;
+text-transform: uppercase;
+color: var(--nexus-pink);
+text-shadow: 0 0 22px rgba(244, 91, 168, 0.18);
+}
+@media (max-width: 900px) {
+.nexus-s5-leaderboard-head,
+.nexus-s5-row {
+grid-template-columns: 58px 1fr 100px;
+}
+.nexus-s5-leaderboard-head div:nth-child(3),
+.nexus-s5-row > div:nth-child(3) {
+display: none;
+}
+}
+@media (max-width: 640px) {
+.nexus-s5-title {
+font-size: clamp(2.55rem, 12vw, 3.7rem);
+letter-spacing: -0.055em;
+}
+.nexus-s5-leaderboard-head,
+.nexus-s5-row {
+grid-template-columns: 44px 1fr 84px;
+padding-inline: 0.85rem;
+}
+.nexus-s5-score {
+font-size: 2.35rem;
+}
+}
+/* =========================================================
+11. SECTION 06 — CHEAT CODES
+Premium palette update
+========================================================= */
+.nexus-s6-section {
+position: relative;
+width: 100%;
+max-width: 90rem;
+margin-inline: auto;
+padding: 0 1.5rem 8rem;
+}
+@media (min-width: 1024px) {
+.nexus-s6-section {
+padding-inline: 3rem;
+padding-bottom: 10rem;
+}
+}
+.nexus-s6-stage {
+position: relative;
+overflow: hidden;
+min-height: 880px;
+border-top: 1px solid rgba(244, 91, 168, 0.15);
+border-bottom: none;
+background:
+radial-gradient(circle at 50% 18%, rgba(244, 91, 168, 0.12), transparent 34%),
+radial-gradient(circle at 24% 54%, rgba(164, 119, 255, 0.10), transparent 36%),
+radial-gradient(circle at 78% 70%, rgba(53, 221, 242, 0.065), transparent 34%),
+linear-gradient(180deg, rgba(248, 243, 255, 0.014), rgba(248, 243, 255, 0.004));
+}
+.nexus-s6-stage::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+opacity: 0.34;
+background:
+linear-gradient(rgba(244, 91, 168, 0.028) 1px, transparent 1px),
+linear-gradient(90deg, rgba(164, 119, 255, 0.024) 1px, transparent 1px);
+background-size: 42px 42px;
+}
+.nexus-s6-stage::after {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+linear-gradient(90deg, rgba(2, 3, 10, 0.84), transparent 16%, transparent 84%, rgba(2, 3, 10, 0.84)),
+linear-gradient(180deg, rgba(2, 3, 10, 0.06), rgba(2, 3, 10, 0.52));
+}
+.nexus-s6-inner {
+position: relative;
+z-index: 2;
+padding: 6rem 0 0;
+}
+.nexus-s6-header {
+max-width: 62rem;
+margin-inline: auto;
+text-align: center;
+}
+.nexus-s6-eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 0.75rem;
+margin-bottom: 1.4rem;
+border: 1px solid rgba(244, 91, 168, 0.26);
+background: rgba(244, 91, 168, 0.055);
+padding: 0.6rem 0.85rem;
+color: var(--nexus-pink);
+box-shadow: 0 0 18px rgba(244, 91, 168, 0.10);
+}
+.nexus-s6-title {
+font-family: "Space Grotesk", sans-serif;
+font-size: clamp(2.85rem, 5.15vw, 5.35rem);
+line-height: 0.92;
+letter-spacing: -0.066em;
+text-transform: uppercase;
+color: var(--nexus-text);
+text-shadow: 0 0 20px rgba(248, 243, 255, 0.12);
+}
+.nexus-s6-title .line-one {
+display: block;
+color: var(--nexus-text);
+text-shadow: 0 0 20px rgba(248, 243, 255, 0.14);
+}
+.nexus-s6-title .line-two {
+display: block;
+color: var(--nexus-pink);
+text-shadow: 0 0 30px rgba(244, 91, 168, 0.34);
+}
+.nexus-s6-copy {
+max-width: 45rem;
+margin: 1.6rem auto 0;
+color: rgba(248, 243, 255, 0.66);
+font-size: 0.98rem;
+line-height: 1.9;
+}
+/* Larger command rectangle */
+.nexus-s6-command {
+position: relative;
+display: grid;
+width: min(100%, 48rem);
+margin: 2.35rem auto 0;
+overflow: hidden;
+border: 1px solid rgba(244, 91, 168, 0.28);
+background:
+radial-gradient(circle at 18% 50%, rgba(244, 91, 168, 0.12), transparent 34%),
+radial-gradient(circle at 82% 50%, rgba(164, 119, 255, 0.10), transparent 34%),
+linear-gradient(180deg, rgba(248, 243, 255, 0.045), rgba(248, 243, 255, 0.010)),
+rgba(2, 3, 10, 0.62);
+padding: 1.05rem;
+color: var(--nexus-pink);
+box-shadow:
+0 0 34px rgba(244, 91, 168, 0.12),
+inset 0 1px 0 rgba(248, 243, 255, 0.050);
+}
+.nexus-s6-command::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+opacity: 0.24;
+background:
+linear-gradient(rgba(248, 243, 255, 0.035) 1px, transparent 1px),
+linear-gradient(90deg, rgba(248, 243, 255, 0.026) 1px, transparent 1px);
+background-size: 28px 28px;
+}
+.nexus-s6-command-inner {
+position: relative;
+z-index: 2;
+display: grid;
+gap: 1rem;
+align-items: center;
+}
+@media (min-width: 768px) {
+.nexus-s6-command-inner {
+grid-template-columns: 1fr auto;
+}
+}
+.nexus-s6-command-label {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+color: rgba(248, 243, 255, 0.48);
+font-size: 0.65rem;
+font-weight: 800;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+}
+.nexus-s6-command-label::before {
+content: "";
+width: 0.55rem;
+height: 0.55rem;
+background: var(--nexus-pink);
+box-shadow: 0 0 14px rgba(244, 91, 168, 0.85);
+}
+.nexus-s6-command-code {
+margin-top: 0.55rem;
+font-family: "Space Grotesk", sans-serif;
+font-size: clamp(1.35rem, 2.4vw, 2.2rem);
+line-height: 1;
+font-weight: 800;
+letter-spacing: -0.055em;
+text-transform: uppercase;
+color: var(--nexus-text);
+}
+.nexus-s6-command-code span {
+color: var(--nexus-pink);
+}
+.nexus-s6-command-button {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+min-height: 3.6rem;
+border: 1px solid rgba(164, 119, 255, 0.36);
+background: rgba(164, 119, 255, 0.08);
+padding: 0.9rem 1.2rem;
+color: var(--nexus-purple);
+font-size: 0.65rem;
+font-weight: 800;
+letter-spacing: 0.20em;
+text-transform: uppercase;
+box-shadow: 0 0 20px rgba(164, 119, 255, 0.10);
+}
+.nexus-s6-cursor {
+display: inline-block;
+animation: nexusS6Cursor 0.9s steps(2, start) infinite;
+}
+.nexus-s6-layout {
+margin-top: 4rem;
+display: grid;
+gap: 1rem;
+}
+@media (min-width: 1024px) {
+.nexus-s6-layout {
+grid-template-columns: 1.08fr 0.92fr;
+}
+}
+.nexus-s6-code-grid {
+display: grid;
+gap: 1rem;
+}
+@media (min-width: 768px) {
+.nexus-s6-code-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+}
+.nexus-s6-card {
+position: relative;
+overflow: hidden;
+min-height: 285px;
+border: 1px solid rgba(248, 243, 255, 0.085);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.038), rgba(248, 243, 255, 0.008)),
+rgba(2, 3, 10, 0.46);
+padding: 1.45rem;
+box-shadow:
+0 0 34px rgba(0, 0, 0, 0.22),
+inset 0 1px 0 rgba(248, 243, 255, 0.045);
+transition: 280ms ease;
+}
+.nexus-s6-card:hover {
+transform: translateY(-4px);
+border-color: currentColor;
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.048), rgba(248, 243, 255, 0.012)),
+rgba(2, 3, 10, 0.58);
+}
+.nexus-s6-card::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+opacity: 0.30;
+background:
+linear-gradient(rgba(248, 243, 255, 0.026) 1px, transparent 1px),
+linear-gradient(90deg, rgba(248, 243, 255, 0.02) 1px, transparent 1px);
+background-size: 28px 28px;
+}
+.nexus-s6-card::after {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background: radial-gradient(circle at 72% 20%, var(--code-glow), transparent 50%);
+opacity: 0.72;
+}
+.nexus-s6-card-inner {
+position: relative;
+z-index: 2;
+}
+.nexus-s6-card-top {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 1rem;
+}
+.nexus-s6-index {
+font-family: "VT323", monospace;
+font-size: 2.9rem;
+line-height: 1;
+color: currentColor;
+}
+.nexus-s6-icon {
+display: flex;
+width: 3.5rem;
+height: 3.5rem;
+align-items: center;
+justify-content: center;
+border: 1px solid currentColor;
+background: rgba(2, 3, 10, 0.40);
+color: currentColor;
+box-shadow: 0 0 18px rgba(248, 243, 255, 0.08);
+}
+.nexus-s6-icon iconify-icon {
+font-size: 1.75rem;
+}
+.nexus-s6-card-title {
+margin-top: 2rem;
+font-family: "Space Grotesk", sans-serif;
+font-size: 1.45rem;
+font-weight: 800;
+line-height: 1;
+letter-spacing: -0.055em;
+text-transform: uppercase;
+color: var(--nexus-text);
+}
+.nexus-s6-card-copy {
+margin-top: 1rem;
+color: rgba(248, 243, 255, 0.58);
+font-size: 0.84rem;
+line-height: 1.75;
+}
+.nexus-s6-card-command {
+margin-top: 1.65rem;
+border: 1px solid currentColor;
+background: rgba(2, 3, 10, 0.44);
+padding: 0.95rem;
+opacity: 0.88;
+}
+.nexus-s6-card-command-label {
+color: rgba(248, 243, 255, 0.36);
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.20em;
+text-transform: uppercase;
+}
+.nexus-s6-card-command-code {
+margin-top: 0.5rem;
+font-family: "Space Grotesk", sans-serif;
+font-size: 0.92rem;
+line-height: 1.2;
+font-weight: 800;
+letter-spacing: -0.035em;
+color: currentColor;
+}
+.nexus-s6-card.is-pink {
+--code-glow: rgba(244, 91, 168, 0.14);
+color: var(--nexus-pink);
+}
+.nexus-s6-card.is-purple {
+--code-glow: rgba(164, 119, 255, 0.14);
+color: var(--nexus-purple);
+}
+.nexus-s6-card.is-blue {
+--code-glow: rgba(94, 140, 255, 0.13);
+color: var(--nexus-blue);
+}
+.nexus-s6-card.is-cyan {
+--code-glow: rgba(53, 221, 242, 0.12);
+color: var(--nexus-cyan);
+}
+.nexus-s6-terminal {
+position: relative;
+overflow: hidden;
+border: 1px solid rgba(244, 91, 168, 0.13);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.038), rgba(248, 243, 255, 0.008)),
+radial-gradient(circle at 78% 18%, rgba(244, 91, 168, 0.10), transparent 34%),
+radial-gradient(circle at 20% 72%, rgba(164, 119, 255, 0.09), transparent 34%),
+rgba(2, 3, 10, 0.52);
+padding: 1.45rem;
+box-shadow:
+0 0 44px rgba(0, 0, 0, 0.24),
+inset 0 1px 0 rgba(248, 243, 255, 0.045);
+}
+.nexus-s6-terminal::before {
+content: "";
+position: absolute;
+inset: 0;
+opacity: 0.26;
+pointer-events: none;
+background:
+linear-gradient(rgba(248, 243, 255, 0.026) 1px, transparent 1px),
+linear-gradient(90deg, rgba(248, 243, 255, 0.02) 1px, transparent 1px);
+background-size: 28px 28px;
+}
+.nexus-s6-terminal-inner {
+position: relative;
+z-index: 2;
+}
+.nexus-s6-terminal-head {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 1rem;
+border-bottom: 1px solid rgba(248, 243, 255, 0.075);
+padding-bottom: 1.2rem;
+}
+.nexus-s6-dots {
+display: flex;
+gap: 0.5rem;
+}
+.nexus-s6-dots span {
+width: 0.75rem;
+height: 0.75rem;
+box-shadow: 0 0 12px currentColor;
+}
+/* Less pixel style here */
+.nexus-s6-terminal-lines {
+margin-top: 1.6rem;
+display: grid;
+gap: 0.8rem;
+font-family: "Space Mono", monospace;
+font-size: 0.86rem;
+line-height: 1.55;
+}
+.nexus-s6-export {
+margin-top: 2.1rem;
+border: 1px solid rgba(164, 119, 255, 0.18);
+background:
+radial-gradient(circle at 82% 20%, rgba(164, 119, 255, 0.11), transparent 36%),
+rgba(164, 119, 255, 0.040);
+padding: 1.25rem;
+}
+.nexus-s6-export-top {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 1rem;
+}
+.nexus-s6-export-icon {
+display: flex;
+width: 3.4rem;
+height: 3.4rem;
+align-items: center;
+justify-content: center;
+border: 1px solid rgba(164, 119, 255, 0.35);
+color: var(--nexus-purple);
+box-shadow: 0 0 18px rgba(164, 119, 255, 0.10);
+}
+.nexus-s6-export-title {
+margin-top: 0.45rem;
+font-family: "Space Grotesk", sans-serif;
+font-size: 1.65rem;
+line-height: 1;
+font-weight: 800;
+letter-spacing: -0.055em;
+text-transform: uppercase;
+color: var(--nexus-purple);
+}
+.nexus-s6-meter-group {
+margin-top: 1.6rem;
+display: grid;
+gap: 1rem;
+}
+.nexus-s6-meter-label {
+margin-bottom: 0.5rem;
+display: flex;
+justify-content: space-between;
+color: rgba(248, 243, 255, 0.46);
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.20em;
+text-transform: uppercase;
+}
+.nexus-s6-meter-track {
+height: 0.52rem;
+border: 1px solid currentColor;
+background: rgba(248, 243, 255, 0.035);
+overflow: hidden;
+}
+.nexus-s6-meter-fill {
+display: block;
+width: var(--meter-width);
+height: 100%;
+background: currentColor;
+box-shadow: 0 0 14px currentColor;
+transform-origin: left center;
+animation: nexusS6Meter 3.4s ease-in-out infinite;
+animation-delay: var(--delay);
+}
+.nexus-s6-chip-row {
+margin-top: 1.4rem;
+display: flex;
+flex-wrap: wrap;
+gap: 0.75rem;
+}
+.nexus-s6-chip {
+border: 1px solid currentColor;
+background: rgba(2, 3, 10, 0.42);
+padding: 0.6rem 0.8rem;
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+animation: nexusS6Chip 2.8s ease-in-out infinite;
+animation-delay: var(--delay);
+}
+@media (max-width: 640px) {
+.nexus-s6-title {
+font-size: clamp(2.55rem, 12vw, 3.7rem);
+letter-spacing: -0.055em;
+}
+.nexus-s6-command-code {
+font-size: clamp(1.25rem, 8vw, 1.85rem);
+}
+.nexus-s6-command-button {
+width: 100%;
+}
+}
+/* =========================================================
+12. SECTION 07 — FINAL CTA
+Premium palette update
+========================================================= */
+.nexus-s7-section {
+position: relative;
+width: 100%;
+max-width: 90rem;
+margin-inline: auto;
+padding: 0 1.5rem 4rem;
+}
+@media (min-width: 1024px) {
+.nexus-s7-section {
+padding-inline: 3rem;
+padding-bottom: 5rem;
+}
+}
+.nexus-s7-stage {
+position: relative;
+overflow: hidden;
+min-height: 760px;
+border-top: 1px solid rgba(53, 221, 242, 0.14);
+border-bottom: none;
+background:
+radial-gradient(circle at 50% 30%, rgba(53, 221, 242, 0.13), transparent 34%),
+radial-gradient(circle at 24% 52%, rgba(244, 91, 168, 0.10), transparent 34%),
+radial-gradient(circle at 76% 56%, rgba(232, 184, 93, 0.07), transparent 34%),
+linear-gradient(180deg, rgba(248, 243, 255, 0.016), rgba(248, 243, 255, 0.004));
+}
+.nexus-s7-stage::before {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+opacity: 0.16;
+background:
+linear-gradient(rgba(53, 221, 242, 0.030) 1px, transparent 1px),
+linear-gradient(90deg, rgba(244, 91, 168, 0.022) 1px, transparent 1px);
+background-size: 42px 42px;
+}
+.nexus-s7-stage::after {
+content: "";
+position: absolute;
+inset: 0;
+pointer-events: none;
+background:
+linear-gradient(90deg, rgba(2, 3, 10, 0.46), transparent 16%, transparent 84%, rgba(2, 3, 10, 0.46)),
+radial-gradient(circle at 50% 44%, transparent 0%, rgba(2, 3, 10, 0.06) 62%, rgba(2, 3, 10, 0.30) 100%);
+}
+.nexus-s7-inner {
+position: relative;
+z-index: 2;
+min-height: 760px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding-block: 6rem;
+text-align: center;
+}
+.nexus-s7-core {
+position: relative;
+margin-bottom: 2.8rem;
+display: flex;
+width: 10rem;
+height: 10rem;
+align-items: center;
+justify-content: center;
+}
+.nexus-s7-ring {
+position: absolute;
+left: 50%;
+top: 50%;
+border-radius: 999px;
+transform: translate(-50%, -50%);
+animation: nexusS7Ring 6s ease-in-out infinite;
+}
+.nexus-s7-ring.r1 {
+width: 10rem;
+height: 10rem;
+border: 1px solid rgba(232, 184, 93, 0.22);
+}
+.nexus-s7-ring.r2 {
+width: 7.2rem;
+height: 7.2rem;
+border: 1px solid rgba(53, 221, 242, 0.26);
+animation-delay: -0.8s;
+}
+.nexus-s7-ring.r3 {
+width: 5rem;
+height: 5rem;
+border: 1px solid rgba(244, 91, 168, 0.22);
+animation-delay: -1.4s;
+}
+.nexus-s7-coin {
+position: relative;
+display: flex;
+width: 6.1rem;
+height: 6.1rem;
+align-items: center;
+justify-content: center;
+border: 2px solid rgba(232, 184, 93, 0.60);
+border-radius: 999px;
+background:
+radial-gradient(circle at 35% 25%, rgba(248, 243, 255, 0.18), transparent 28%),
+rgba(232, 184, 93, 0.09);
+color: var(--nexus-gold);
+box-shadow:
+0 0 34px rgba(232, 184, 93, 0.22),
+inset 0 0 24px rgba(232, 184, 93, 0.08);
+}
+.nexus-s7-coin::before {
+content: "";
+position: absolute;
+inset: 0.8rem;
+border: 1px dashed rgba(232, 184, 93, 0.36);
+border-radius: inherit;
+animation: nexusS7Spin 18s linear infinite;
+}
+.nexus-s7-eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 0.75rem;
+margin-bottom: 1.45rem;
+border: 1px solid rgba(53, 221, 242, 0.28);
+background: rgba(53, 221, 242, 0.055);
+padding: 0.6rem 0.85rem;
+color: var(--nexus-cyan);
+box-shadow: 0 0 18px rgba(53, 221, 242, 0.10);
+}
+.nexus-s7-title {
+max-width: 62rem;
+margin-inline: auto;
+font-family: "VT323", monospace;
+font-size: clamp(5.1rem, 9vw, 9rem);
+line-height: 0.84;
+letter-spacing: -0.035em;
+text-transform: uppercase;
+color: var(--nexus-text);
+text-shadow:
+0 0 16px rgba(248, 243, 255, 0.16),
+0 0 42px rgba(53, 221, 242, 0.08);
+}
+.nexus-s7-title .line-one {
+color: var(--nexus-text);
+text-shadow:
+0 0 16px rgba(248, 243, 255, 0.18),
+0 0 44px rgba(53, 221, 242, 0.08);
+}
+.nexus-s7-title .line-two {
+color: var(--nexus-cyan);
+text-shadow:
+0 0 24px rgba(53, 221, 242, 0.42),
+0 0 54px rgba(244, 91, 168, 0.14);
+}
+.nexus-s7-copy {
+max-width: 43rem;
+margin: 2rem auto 0;
+color: rgba(248, 243, 255, 0.70);
+font-size: 0.98rem;
+line-height: 1.95;
+}
+.nexus-s7-actions {
+margin-top: 3rem;
+display: flex;
+flex-direction: column;
+gap: 1rem;
+}
+@media (min-width: 640px) {
+.nexus-s7-actions {
+flex-direction: row;
+align-items: center;
+justify-content: center;
+}
+}
+.nexus-s7-button-primary,
+.nexus-s7-button-secondary {
+position: relative;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 0.9rem;
+overflow: hidden;
+padding: 1rem 1.65rem;
+font-size: 0.76rem;
+font-weight: 800;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+transition: 280ms ease;
+}
+.nexus-s7-button-primary {
+border: 2px solid var(--nexus-gold);
+background: var(--nexus-gold);
+color: var(--nexus-bg);
+box-shadow: 0 0 26px rgba(232, 184, 93, 0.24);
+}
+.nexus-s7-button-primary:hover {
+transform: translateY(-3px);
+box-shadow: 0 0 44px rgba(232, 184, 93, 0.38);
+}
+.nexus-s7-button-secondary {
+border: 2px solid rgba(53, 221, 242, 0.48);
+background: rgba(2, 3, 10, 0.72);
+color: var(--nexus-cyan);
+box-shadow: 0 0 20px rgba(53, 221, 242, 0.10);
+}
+.nexus-s7-button-secondary:hover {
+transform: translateY(-3px);
+border-color: var(--nexus-cyan);
+background: rgba(53, 221, 242, 0.08);
+box-shadow: 0 0 34px rgba(53, 221, 242, 0.24);
+}
+.nexus-s7-status {
+margin-top: 3rem;
+width: min(100%, 48rem);
+overflow: hidden;
+border: 1px solid rgba(248, 243, 255, 0.085);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.035), rgba(248, 243, 255, 0.008)),
+rgba(2, 3, 10, 0.42);
+backdrop-filter: blur(10px);
+box-shadow: 0 0 38px rgba(0, 0, 0, 0.18);
+}
+.nexus-s7-status-grid {
+display: grid;
+}
+@media (min-width: 768px) {
+.nexus-s7-status-grid {
+grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+}
+.nexus-s7-status-item {
+position: relative;
+padding: 1.2rem;
+border-bottom: 1px solid rgba(248, 243, 255, 0.08);
+}
+@media (min-width: 768px) {
+.nexus-s7-status-item {
+border-bottom: none;
+border-right: 1px solid rgba(248, 243, 255, 0.08);
+}
+.nexus-s7-status-item:last-child {
+border-right: none;
+}
+}
+.nexus-s7-status-item:last-child {
+border-bottom: none;
+}
+@media (max-width: 640px) {
+.nexus-s7-inner {
+min-height: 720px;
+padding-block: 5rem;
+}
+.nexus-s7-title {
+font-size: clamp(4.4rem, 17vw, 6rem);
+}
+}
+/* =========================================================
+FOOTER — SEPARATE FROM FINAL CTA
+Premium palette update
+========================================================= */
+.nexus-footer {
+position: relative;
+width: 100%;
+max-width: 90rem;
+margin: 0 auto;
+padding: 0 1.5rem 2rem;
+}
+@media (min-width: 1024px) {
+.nexus-footer {
+padding-inline: 3rem;
+padding-bottom: 2.5rem;
+}
+}
+.nexus-footer-shell {
+position: relative;
+overflow: hidden;
+border-top: 1px solid rgba(248, 243, 255, 0.10);
+background:
+linear-gradient(180deg, rgba(248, 243, 255, 0.024), rgba(248, 243, 255, 0.006)),
+rgba(2, 3, 10, 0.28);
+padding: 2rem;
+}
+.nexus-footer-shell::before {
+content: "NEXUS";
+position: absolute;
+right: -0.4rem;
+bottom: -1.25rem;
+font-family: "VT323", monospace;
+font-size: clamp(7rem, 14vw, 15rem);
+line-height: 0.7;
+color: rgba(248, 243, 255, 0.035);
+pointer-events: none;
+}
+.nexus-footer-grid {
+position: relative;
+z-index: 2;
+display: grid;
+gap: 2rem;
+}
+@media (min-width: 1024px) {
+.nexus-footer-grid {
+grid-template-columns: 1fr auto 1fr;
+align-items: center;
+}
+}
+.nexus-footer-logo {
+display: flex;
+align-items: center;
+gap: 0.75rem;
+}
+.nexus-footer-mark {
+position: relative;
+display: inline-flex;
+width: 2.7rem;
+height: 2.7rem;
+align-items: center;
+justify-content: center;
+border: 1px solid rgba(53, 221, 242, 0.42);
+background: rgba(53, 221, 242, 0.08);
+color: var(--nexus-cyan);
+box-shadow: 0 0 22px rgba(53, 221, 242, 0.14);
+}
+.nexus-footer-mark::after {
+content: "";
+position: absolute;
+right: -3px;
+top: -3px;
+width: 8px;
+height: 8px;
+background: var(--nexus-pink);
+box-shadow: 0 0 12px rgba(244, 91, 168, 0.85);
+}
+.nexus-footer-nav {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 0.65rem;
+}
+.nexus-footer-link {
+border: 1px solid rgba(248, 243, 255, 0.10);
+background: rgba(248, 243, 255, 0.025);
+padding: 0.65rem 0.85rem;
+color: rgba(248, 243, 255, 0.58);
+font-size: 0.66rem;
+font-weight: 800;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+transition: 240ms ease;
+}
+.nexus-footer-link:hover {
+border-color: rgba(53, 221, 242, 0.34);
+background: rgba(53, 221, 242, 0.06);
+color: var(--nexus-cyan);
+box-shadow: 0 0 18px rgba(53, 221, 242, 0.10);
+}
+.nexus-footer-meta {
+position: relative;
+z-index: 2;
+margin-top: 2rem;
+padding-top: 1.25rem;
+border-top: 1px solid rgba(248, 243, 255, 0.08);
+display: flex;
+flex-direction: column;
+gap: 0.75rem;
+color: rgba(248, 243, 255, 0.38);
+font-size: 0.66rem;
+font-weight: 700;
+letter-spacing: 0.08em;
+}
+@media (min-width: 768px) {
+.nexus-footer-meta {
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+}
+}
+@media (max-width: 640px) {
+.nexus-footer-shell {
+padding: 1.5rem;
+}
+.nexus-footer-nav {
+justify-content: flex-start;
+}
+.nexus-footer-link {
+font-size: 0.6rem;
+padding: 0.58rem 0.72rem;
+}
+.nexus-footer-shell::before {
+font-size: 7rem;
+right: -0.2rem;
+bottom: -0.7rem;
+}
+}
+/* =========================================================
+HERO CUBE VISIBILITY FIX
+Makes the falling cubes more visible behind the hero only.
+========================================================= */
+.nexus-hero::before {
+opacity: 0.38;
+}
+.nexus-hero::after {
+display: none;
+}
+/* =========================================================
+13. ANIMATIONS
+========================================================= */
+@keyframes nexusCubeRotate {
+0% {
+transform: rotateX(-18deg) rotateY(0deg) rotateZ(0deg);
+}
+100% {
+transform: rotateX(-18deg) rotateY(360deg) rotateZ(0deg);
+}
+}
+@keyframes nexusCoreOrbit {
+from {
+transform: rotate(0deg);
+}
+to {
+transform: rotate(360deg);
+}
+}
+@keyframes nexusMiniFall {
+0% {
+transform: translate3d(0, -14px, 0) rotate(0deg);
+opacity: 0;
+}
+18% {
+opacity: 1;
+}
+78% {
+opacity: 0.82;
+}
+100% {
+transform: translate3d(-26px, 160px, 0) rotate(240deg);
+opacity: 0;
+}
+}
+@keyframes nexusCoreMeter {
+0%,
+100% {
+transform: scaleX(0.78);
+transform-origin: left center;
+}
+50% {
+transform: scaleX(1);
+transform-origin: left center;
+}
+}
+@keyframes nexusS2CorePulse {
+0%,
+100% {
+transform: translate(-50%, -50%) scale(0.88);
+opacity: 0.52;
+}
+50% {
+transform: translate(-50%, -50%) scale(1.1);
+opacity: 1;
+}
+}
+@keyframes nexusS2PixelFlow {
+0% {
+left: 8%;
+top: 28%;
+opacity: 0;
+transform: scale(0.7) rotate(0deg);
+}
+12% {
+opacity: 1;
+}
+42% {
+left: 47%;
+top: 44%;
+transform: scale(1) rotate(120deg);
+}
+72% {
+left: 72%;
+top: 34%;
+opacity: 1;
+transform: scale(0.9) rotate(240deg);
+}
+100% {
+left: 92%;
+top: 62%;
+opacity: 0;
+transform: scale(0.55) rotate(360deg);
+}
+}
+@keyframes nexusS2Meter {
+0%,
+100% {
+width: 62%;
+}
+50% {
+width: 91%;
+}
+}
+@keyframes nexusS3Meter {
+0%,
+100% {
+transform: scaleX(0.78);
+opacity: 0.72;
+}
+50% {
+transform: scaleX(1);
+opacity: 1;
+}
+}
+@keyframes nexusS4CorePulse {
+0%,
+100% {
+transform: translate(-50%, -50%) scale(0.88);
+opacity: 0.52;
+}
+50% {
+transform: translate(-50%, -50%) scale(1.1);
+opacity: 1;
+}
+}
+@keyframes nexusS4Signal {
+0%,
+100% {
+transform: scaleX(0.78);
+opacity: 0.72;
+}
+50% {
+transform: scaleX(1);
+opacity: 1;
+}
+}
+@keyframes nexusS5Dot {
+0%,
+100% {
+opacity: 0.42;
+transform: scale(0.75);
+}
+50% {
+opacity: 1;
+transform: scale(1);
+}
+}
+@keyframes nexusS5Progress {
+from {
+transform: scaleX(0);
+}
+to {
+transform: scaleX(1);
+}
+}
+@keyframes nexusS5Pulse {
+0%,
+100% {
+opacity: 0.72;
+filter: brightness(0.85);
+}
+50% {
+opacity: 1;
+filter: brightness(1.18);
+}
+}
+@keyframes nexusS6Cursor {
+0%,
+46% {
+opacity: 1;
+}
+47%,
+100% {
+opacity: 0;
+}
+}
+@keyframes nexusS6Meter {
+0%,
+100% {
+transform: scaleX(0.72);
+opacity: 0.72;
+}
+50% {
+transform: scaleX(1);
+opacity: 1;
+}
+}
+@keyframes nexusS6Chip {
+0%,
+100% {
+opacity: 0.62;
+}
+50% {
+opacity: 1;
+}
+}
+@keyframes nexusS7Ring {
+0%,
+100% {
+transform: translate(-50%, -50%) scale(0.94);
+opacity: 0.55;
+}
+50% {
+transform: translate(-50%, -50%) scale(1.08);
+opacity: 1;
+}
+}
+@keyframes nexusS7Spin {
+from {
+transform: rotate(0deg);
+}
+to {
+transform: rotate(360deg);
+}
+}
+/* =========================================================
+14. RESPONSIVE FIXES
+========================================================= */
+@media (max-width: 900px) {
+.nexus-s5-leaderboard-head,
+.nexus-s5-row {
+grid-template-columns: 58px 1fr 100px;
+}
+.nexus-s5-leaderboard-head div:nth-child(3),
+.nexus-s5-row>div:nth-child(3) {
+display: none;
+}
+}
+@media (max-width: 640px) {
+.nexus-hero {
+padding-top: 9rem;
+padding-bottom: 6rem;
+}
+.nexus-hero-title {
+font-size: clamp(4rem, 17vw, 5.4rem);
+}
+.nexus-hero-stats {
+grid-template-columns: 1fr;
+}
+.nexus-hero-stat {
+border-right: none;
+border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+.nexus-hero-stat:last-child {
+border-bottom: none;
+}
+.nexus-s2-title {
+font-size: clamp(2.55rem, 12vw, 3.7rem);
+letter-spacing: -0.055em;
+}
+.nexus-s2-title .line-one,
+.nexus-s2-title .line-two {
+white-space: normal;
+}
+.nexus-s2-node {
+min-width: auto;
+font-size: 0.55rem;
+padding: 0.62rem 0.65rem;
+}
+.nexus-s2-monitor {
+height: 500px;
+}
+.nexus-s3-inner,
+.nexus-s4-inner,
+.nexus-s5-inner,
+.nexus-s6-inner {
+padding-top: 4.5rem;
+}
+.nexus-s3-title {
+font-size: clamp(2.55rem, 12vw, 3.7rem);
+letter-spacing: -0.055em;
+}
+.nexus-s3-card {
+min-height: auto;
+}
+.nexus-s4-title {
+font-size: clamp(3.1rem, 14vw, 4.5rem);
+}
+.nexus-s4-monitor {
+height: 520px;
+}
+.nexus-s4-monitor-label {
+min-width: auto;
+font-size: 0.55rem;
+padding: 0.62rem 0.65rem;
+}
+.nexus-s6-title {
+font-size: clamp(3.2rem, 15vw, 4.8rem);
+}
+.nexus-s5-leaderboard-head,
+.nexus-s5-row {
+grid-template-columns: 44px 1fr 84px;
+padding-inline: 0.85rem;
+}
+.nexus-s6-command span {
+font-size: 1.5rem;
+}
+.nexus-s7-inner {
+min-height: 720px;
+padding-block: 5rem;
+}
+.nexus-s7-title {
+font-size: clamp(4.4rem, 17vw, 6rem);
+}
+.nexus-footer-shell {
+padding: 1.5rem;
+}
 }
