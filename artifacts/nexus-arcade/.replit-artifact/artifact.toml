@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Nexus Idea Arcade"
+version = "1.0.0"
+id = "artifacts/nexus-arcade"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20075
+
+[services.development]
+run = "pnpm --filter @workspace/nexus-arcade run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/nexus-arcade", "run", "build" ]
+publicDir = "artifacts/nexus-arcade/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20075"
+BASE_PATH = "/"
