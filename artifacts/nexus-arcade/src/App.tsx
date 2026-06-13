@@ -14,12 +14,12 @@ export default function App() {
 
   return (
     <>
-      {/* Physics canvas (behind everything) */}
-      <div id="physics-layer" className="nexus-physics-layer">
+      <div id="physics-layer">
         <canvas id="pixel-canvas" />
+        <div className="nexus-scanlines" />
+        <div className="nexus-vignette" />
       </div>
 
-      {/* Page shell */}
       <div className="nexus-page-shell">
         <Header />
         <Hero />

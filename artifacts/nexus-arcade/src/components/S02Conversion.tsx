@@ -55,6 +55,7 @@ export default function S02Conversion() {
                 </div>
                 <p className="text-xs leading-relaxed" style={{ color: "rgba(232,184,93,0.72)" }}>
                   Better inputs create better collisions. Better collisions create better worlds.
+                  This chamber is the first physical stop in the page-wide falling block sequence.
                 </p>
               </div>
             </div>
