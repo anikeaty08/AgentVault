@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+.vite/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+
+# Local workspace artifacts
+AgentVault/node_modules/
+AgentVault/artifacts/agentvault/vite.full.log
+AgentVault/artifacts/agentvault/vite.out.log
+AgentVault/artifacts/agentvault/vite.err.log
