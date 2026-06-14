@@ -411,7 +411,7 @@ importers:
         specifier: 'catalog:'
         version: 3.25.76
 
-  artifacts/agentvault:
+  apps/web:
     dependencies:
       '@iconify/react':
         specifier: ^6.0.2
