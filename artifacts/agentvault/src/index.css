@@ -1464,14 +1464,17 @@ text-transform: uppercase;
 }
 .nexus-s3-meter-track {
 height: 0.45rem;
+color: currentColor;
 border: 1px solid currentColor;
 background: rgba(248, 243, 255, 0.035);
 opacity: 0.86;
+overflow: hidden;
 }
 .nexus-s3-meter-fill {
 display: block;
 height: 100%;
 width: var(--meter-width);
+color: currentColor;
 background: currentColor;
 box-shadow: 0 0 14px currentColor;
 animation: nexusS3Meter 3.4s ease-in-out infinite;
@@ -2890,6 +2893,7 @@ text-transform: uppercase;
 }
 .nexus-s6-meter-track {
 height: 0.52rem;
+color: currentColor;
 border: 1px solid currentColor;
 background: rgba(248, 243, 255, 0.035);
 overflow: hidden;
@@ -2898,6 +2902,7 @@ overflow: hidden;
 display: block;
 width: var(--meter-width);
 height: 100%;
+color: currentColor;
 background: currentColor;
 box-shadow: 0 0 14px currentColor;
 transform-origin: left center;

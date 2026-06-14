@@ -54,35 +54,35 @@ export function useNexusApp() {
         scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: 1 },
       });
 
-      buildReveal("#chaos-to-form", [
+      buildReveal("#why-agentvault", [
         { targets: ".nexus-s2-corner", from: { scale: 0 }, to: { scale: 1, duration: 0.5, ease: "back.out(2)", stagger: 0.07 }, at: 0 },
-        { targets: "#chaos-to-form .nexus-s2-title .line-one, #chaos-to-form .nexus-s2-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.1 },
+        { targets: "#why-agentvault .nexus-s2-title .line-one, #why-agentvault .nexus-s2-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.1 },
         { targets: ".nexus-s2-intro", from: { y: 24 }, to: { y: 0 }, at: 0.4 },
         { targets: ".nexus-s2-rail-item", from: { x: -34 }, to: { x: 0, stagger: 0.13 }, at: 0.55 },
         { targets: ".nexus-s2-machine", from: { x: 46, scale: 0.98 }, to: { x: 0, scale: 1, duration: 0.9 }, at: 0.6 },
-        { targets: "#chaos-to-form .nexus-s2-node", from: { scale: 0.5 }, to: { scale: 1, duration: 0.5, ease: "back.out(1.8)", stagger: 0.08 }, at: 1.1 },
+        { targets: "#why-agentvault .nexus-s2-node", from: { scale: 0.5 }, to: { scale: 1, duration: 0.5, ease: "back.out(1.8)", stagger: 0.08 }, at: 1.1 },
         { targets: [".nexus-s2-info-card", ".nexus-s2-note"], from: { y: 26 }, to: { y: 0, stagger: 0.14 }, at: 0.95 },
       ]);
 
-      buildReveal("#game-modes", [
+      buildReveal("#roadmap", [
         { targets: ".nexus-s3-eyebrow", from: { y: 18 }, to: { y: 0, duration: 0.55 }, at: 0 },
-        { targets: "#game-modes .nexus-s3-title .line-one, #game-modes .nexus-s3-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.1 },
+        { targets: "#roadmap .nexus-s3-title .line-one, #roadmap .nexus-s3-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.1 },
         { targets: ".nexus-s3-copy", from: { y: 24 }, to: { y: 0 }, at: 0.4 },
         { targets: ".nexus-s3-card", from: { y: 52, scale: 0.96 }, to: { y: 0, scale: 1, duration: 0.8, stagger: 0.12 }, at: 0.5 },
       ]);
 
-      buildReveal("#collision-engine", [
+      buildReveal("#architecture", [
         { targets: ".nexus-s4-eyebrow", from: { y: 18 }, to: { y: 0, duration: 0.55 }, at: 0 },
-        { targets: "#collision-engine .nexus-s4-title .line-one, #collision-engine .nexus-s4-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.1 },
+        { targets: "#architecture .nexus-s4-title .line-one, #architecture .nexus-s4-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.1 },
         { targets: ".nexus-s4-copy", from: { y: 24 }, to: { y: 0 }, at: 0.4 },
         { targets: ".nexus-s4-process-card", from: { y: 42 }, to: { y: 0, stagger: 0.13 }, at: 0.55 },
         { targets: ".nexus-s4-machine", from: { y: 48, scale: 0.98 }, to: { y: 0, scale: 1, duration: 0.9 }, at: 0.65 },
         { targets: ".nexus-s4-console", from: { y: 26 }, to: { y: 0 }, at: 1.05 },
       ]);
 
-      buildReveal("#high-scores", [
+      buildReveal("#scale", [
         { targets: ".nexus-s5-eyebrow", from: { y: 18 }, to: { y: 0, duration: 0.55 }, at: 0 },
-        { targets: "#high-scores .nexus-s5-title .line-one, #high-scores .nexus-s5-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.1 },
+        { targets: "#scale .nexus-s5-title .line-one, #scale .nexus-s5-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.1 },
         { targets: ".nexus-s5-copy", from: { y: 24 }, to: { y: 0 }, at: 0.35 },
         { targets: ".nexus-s5-tags", from: { y: 18 }, to: { y: 0, duration: 0.55 }, at: 0.5 },
         { targets: ".nexus-s5-metric-card", from: { y: 44, scale: 0.97 }, to: { y: 0, scale: 1, stagger: 0.1 }, at: 0.55 },
@@ -90,19 +90,19 @@ export function useNexusApp() {
         { targets: ".nexus-s5-row", from: { x: -26 }, to: { x: 0, duration: 0.55, stagger: 0.09 }, at: 1.05 },
       ]);
 
-      buildReveal("#cheat-codes", [
+      buildReveal("#principles", [
         { targets: ".nexus-s6-eyebrow", from: { y: 18 }, to: { y: 0, duration: 0.55 }, at: 0 },
-        { targets: "#cheat-codes .nexus-s6-title .line-one, #cheat-codes .nexus-s6-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.1 },
+        { targets: "#principles .nexus-s6-title .line-one, #principles .nexus-s6-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.1 },
         { targets: ".nexus-s6-copy", from: { y: 24 }, to: { y: 0 }, at: 0.35 },
         { targets: ".nexus-s6-command", from: { y: 28, scale: 0.98 }, to: { y: 0, scale: 1 }, at: 0.5 },
         { targets: ".nexus-s6-card", from: { y: 46, scale: 0.97 }, to: { y: 0, scale: 1, stagger: 0.11 }, at: 0.65 },
         { targets: ".nexus-s6-export", from: { y: 36 }, to: { y: 0, duration: 0.8 }, at: 1.0 },
       ]);
 
-      buildReveal("#join-the-guild", [
+      buildReveal("#build", [
         { targets: ".nexus-s7-core", from: { scale: 0.4 }, to: { scale: 1, duration: 0.9, ease: "back.out(1.6)" }, at: 0 },
         { targets: ".nexus-s7-eyebrow", from: { y: 18 }, to: { y: 0, duration: 0.55 }, at: 0.35 },
-        { targets: "#join-the-guild .nexus-s7-title .line-one, #join-the-guild .nexus-s7-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.45 },
+        { targets: "#build .nexus-s7-title .line-one, #build .nexus-s7-title .line-two", from: { clipPath: CLIP_HIDDEN }, to: { clipPath: CLIP_SHOWN, duration: 0.85, stagger: 0.14 }, at: 0.45 },
         { targets: ".nexus-s7-copy", from: { y: 24 }, to: { y: 0 }, at: 0.75 },
         { targets: ".nexus-s7-actions", from: { y: 26 }, to: { y: 0 }, at: 0.9 },
         { targets: ".nexus-s7-status-item", from: { y: 30 }, to: { y: 0, duration: 0.6, stagger: 0.1 }, at: 1.05 },
@@ -115,7 +115,7 @@ export function useNexusApp() {
 
     // Counter animation
     ScrollTrigger.create({
-      trigger: "#high-scores",
+      trigger: "#scale",
       start: "top 78%",
       once: true,
       onEnter: () => {
@@ -408,29 +408,29 @@ export function useNexusApp() {
 
     function setupScrollPhysics() {
       const sections = [
-        { trigger: "#chaos-to-form",   id: "section-2-catcher", attr: "data-s2-collider", label: "s2", count: 42,
+        { trigger: "#why-agentvault",  id: "section-2-catcher", attr: "data-s2-collider", label: "s2", count: 42,
           activate() { if (section2Activated) return; section2Activated = true;
             createSectionCatchers("section-2-catcher", "data-s2-collider", "s2");
             const rem = boundaries.filter((b: any) => b.label === "hero-floor" || b.label === "hero-ramp");
             if (rem.length) World.remove(world, rem);
             spawnSectionBlocks("section-2-catcher", 42); wakeBlocks(1.8, 2.5, 3.2, 0.18); } },
-        { trigger: "#game-modes",      id: "section-3-catcher", attr: "data-s3-collider", label: "s3", count: 38,
+        { trigger: "#roadmap",         id: "section-3-catcher", attr: "data-s3-collider", label: "s3", count: 38,
           activate() { if (section3Activated) return; section3Activated = true;
             createSectionCatchers("section-3-catcher", "data-s3-collider", "s3");
             spawnSectionBlocks("section-3-catcher", 38); wakeBlocks(1.9, 2.6, 3.3, 0.20); } },
-        { trigger: "#collision-engine",id: "section-4-catcher", attr: "data-s4-collider", label: "s4", count: 36,
+        { trigger: "#architecture",    id: "section-4-catcher", attr: "data-s4-collider", label: "s4", count: 36,
           activate() { if (section4Activated) return; section4Activated = true;
             createSectionCatchers("section-4-catcher", "data-s4-collider", "s4");
             spawnSectionBlocks("section-4-catcher", 36); wakeBlocks(2.0, 2.6, 3.3, 0.22); } },
-        { trigger: "#high-scores",     id: "section-5-catcher", attr: "data-s5-collider", label: "s5", count: 34,
+        { trigger: "#scale",           id: "section-5-catcher", attr: "data-s5-collider", label: "s5", count: 34,
           activate() { if (section5Activated) return; section5Activated = true;
             createSectionCatchers("section-5-catcher", "data-s5-collider", "s5");
             spawnSectionBlocks("section-5-catcher", 34); wakeBlocks(2.1, 2.6, 3.4, 0.24); } },
-        { trigger: "#cheat-codes",     id: "section-6-catcher", attr: "data-s6-collider", label: "s6", count: 34,
+        { trigger: "#principles",      id: "section-6-catcher", attr: "data-s6-collider", label: "s6", count: 34,
           activate() { if (section6Activated) return; section6Activated = true;
             createSectionCatchers("section-6-catcher", "data-s6-collider", "s6");
             spawnSectionBlocks("section-6-catcher", 34); wakeBlocks(2.2, 2.7, 3.5, 0.26); } },
-        { trigger: "#join-the-guild",  id: "section-7-catcher", attr: "data-s7-collider", label: "s7", count: 32,
+        { trigger: "#build",           id: "section-7-catcher", attr: "data-s7-collider", label: "s7", count: 32,
           activate() { if (section7Activated) return; section7Activated = true;
             createSectionCatchers("section-7-catcher", "data-s7-collider", "s7");
             spawnSectionBlocks("section-7-catcher", 32); wakeBlocks(2.4, 3.0, 3.8, 0.30); } },
